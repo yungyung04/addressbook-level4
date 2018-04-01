@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.model.person.exceptions.DuplicateTaskException;
+import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.personal.PersonalSchedule;
 import seedu.address.model.personal.PersonalTask;
 
@@ -23,7 +25,8 @@ public class AddPersonalTaskCommand extends UndoableCommand {
             + "1h30m "
             + "Calculus homework page 24.";
     public static final String MESSAGE_SUCCESS = "New personal task added.";
-
+    public static final String DUPLICATE_TASK = "Task already exits";
+    public static final String TIMING_CLASH = "Timing clash detected";
     private final PersonalTask toAdd;
 
     /**
@@ -37,7 +40,13 @@ public class AddPersonalTaskCommand extends UndoableCommand {
     @Override
     public CommandResult executeUndoableCommand() {
         new PersonalSchedule().addTask(toAdd);
-        model.addTask(toAdd);
+        try {
+            model.addTask(toAdd);
+        } catch (DuplicateTaskException a) {
+            System.out.println("Duplicate problem"); // This needs to be replaced with an exception call
+        } catch (TimingClashException b) {
+            System.out.println("Timing clash problem"); // This needs to be replaced with an exception call
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
