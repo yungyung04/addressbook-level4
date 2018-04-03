@@ -10,11 +10,17 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.ChangeCommand;
+import seedu.address.logic.parser.exceptions.SameTimeUnitException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutee.EducationLevel;
+import seedu.address.model.tutee.Grade;
+import seedu.address.model.tutee.School;
+import seedu.address.model.tutee.Subject;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -164,5 +170,122 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    //@@author ChoChihTun
+    /**
+     * Parses a {@code String subject} into an {@code Subject}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code subject} is invalid.
+     */
+    public static Subject parseSubject(String subject) throws IllegalValueException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubject(trimmedSubject)) {
+            throw new IllegalValueException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
+        }
+        return new Subject(trimmedSubject);
+    }
+
+    /**
+     * Parses a {@code Optional<String> subject} into an {@code Optional<Subject>} if {@code subject} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Subject> parseSubject(Optional<String> subject) throws IllegalValueException {
+        requireNonNull(subject);
+        return subject.isPresent() ? Optional.of(parseSubject(subject.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String educationLevel} into an {@code EducationLevel}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code educationLevel} is invalid.
+     */
+    public static EducationLevel parseEducationLevel(String educationLevel) throws IllegalValueException {
+        requireNonNull(educationLevel);
+        String trimmedEducationLevel = educationLevel.trim();
+        if (!EducationLevel.isValidEducationLevel(trimmedEducationLevel)) {
+            throw new IllegalValueException(EducationLevel.MESSAGE_EDUCATION_LEVEL_CONSTRAINTS);
+        }
+        return new EducationLevel(trimmedEducationLevel);
+    }
+
+    /**
+     * Parses a {@code Optional<String> educationLevel} into an {@code Optional<EducationLevel>}
+     * if {@code educationLevel} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<EducationLevel> parseEducationLevel(Optional<String> educationLevel)
+            throws IllegalValueException {
+        requireNonNull(educationLevel);
+        return educationLevel.isPresent() ? Optional.of(parseEducationLevel(educationLevel.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String school} into an {@code School}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code school} is invalid.
+     */
+    public static School parseSchool(String school) throws IllegalValueException {
+        requireNonNull(school);
+        String trimmedSchool = school.trim();
+        if (!School.isValidSchool(trimmedSchool)) {
+            throw new IllegalValueException(School.MESSAGE_SCHOOL_CONSTRAINTS);
+        }
+        return new School(trimmedSchool);
+    }
+
+    /**
+     * Parses a {@code Optional<String> school} into an {@code Optional<School>} if {@code school} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<School> parseSchool(Optional<String> school) throws IllegalValueException {
+        requireNonNull(school);
+        return school.isPresent() ? Optional.of(parseSchool(school.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String grade} into an {@code Grade}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code grade} is invalid.
+     */
+    public static Grade parseGrade(String grade) throws IllegalValueException {
+        requireNonNull(grade);
+        String trimmedGrade = grade.trim();
+        if (!Grade.isValidGrade(trimmedGrade)) {
+            throw new IllegalValueException(Grade.MESSAGE_GRADE_CONSTRAINTS);
+        }
+        return new Grade(trimmedGrade);
+    }
+
+    /**
+     * Parses a {@code Optional<String> grade} into an {@code Optional<Grade>} if {@code grade} is present.
+     * See header comment of this class regarding the use of {@code Optional} parameters.
+     */
+    public static Optional<Grade> parseGrade(Optional<String> grade) throws IllegalValueException {
+        requireNonNull(grade);
+        return grade.isPresent() ? Optional.of(parseGrade(grade.get())) : Optional.empty();
+    }
+
+    /**
+     * Parses a {@code String timeUnit} into an {@code String} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws IllegalValueException if the given {@code timeUnit} is invalid.
+     */
+    public static String parseTimeUnit(String timeUnit) throws IllegalValueException, SameTimeUnitException {
+        requireNonNull(timeUnit);
+        String trimmedTimeUnit = timeUnit.trim();
+        if (!ChangeCommandParser.isValidTimeUnit(trimmedTimeUnit)) {
+            throw new IllegalValueException(ChangeCommand.MESSAGE_CONSTRAINT);
+        }
+        if (ChangeCommandParser.isTimeUnitClash(trimmedTimeUnit)) {
+            throw new SameTimeUnitException(ChangeCommand.MESSAGE_SAME_VIEW);
+        }
+        return trimmedTimeUnit;
     }
 }
