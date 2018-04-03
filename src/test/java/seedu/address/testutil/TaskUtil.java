@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import seedu.address.logic.commands.AddPersonalTaskCommand;
 
 import seedu.address.model.Task;
@@ -25,5 +28,14 @@ public class TaskUtil {
         sb.append(task.getDuration() + " ");
         sb.append(task.getDescription() + " ");
         return sb.toString();
+    }
+
+    /**
+     * Converts a date and time string to a local date time object
+     */
+    public static LocalDateTime toLocalDateAndTime(String sDateAndTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
+        LocalDateTime lDateAndTime = LocalDateTime.parse(sDateAndTime, formatter);
+        return lDateAndTime;
     }
 }
