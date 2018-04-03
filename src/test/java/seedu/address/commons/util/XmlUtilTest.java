@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,10 +18,13 @@ import org.junit.rules.ExpectedException;
 import seedu.address.model.AddressBook;
 import seedu.address.storage.XmlAdaptedPerson;
 import seedu.address.storage.XmlAdaptedTag;
+import seedu.address.storage.XmlAdaptedTask;
 import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TaskUtil;
 import seedu.address.testutil.TestUtil;
+
 
 public class XmlUtilTest {
 
@@ -31,7 +35,16 @@ public class XmlUtilTest {
     private static final File MISSING_PERSON_FIELD_FILE = new File(TEST_DATA_FOLDER + "missingPersonField.xml");
     private static final File INVALID_PERSON_FIELD_FILE = new File(TEST_DATA_FOLDER + "invalidPersonField.xml");
     private static final File VALID_PERSON_FILE = new File(TEST_DATA_FOLDER + "validPerson.xml");
+    private static final File MISSING_TASK_FIELD_FILE = new File(TEST_DATA_FOLDER + "missingTaskField.xml");
+    private static final File INVALID_TASK_FIELD_FILE = new File(TEST_DATA_FOLDER + "invalidTaskField.xml");
+    private static final File VALID_TASK_FILE = new File(TEST_DATA_FOLDER + "validTask.xml");
     private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml"));
+
+    private static final String INVALID_DURATION = "3h2";
+
+    private static final String VALID_DURATION = "3h20m";
+    private static final String VALID_DESCRIPTION = "exampleTask1";
+    private static final String VALID_DATEANDTIME = "02-05-2018T03:20";
 
     private static final String INVALID_PHONE = "9482asf424";
 
@@ -73,6 +86,7 @@ public class XmlUtilTest {
         AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
         assertEquals(9, dataFromFile.getPersonList().size());
         assertEquals(0, dataFromFile.getTagList().size());
+        assertEquals(3, dataFromFile.getTaskList().size());
     }
 
     @Test
@@ -85,6 +99,16 @@ public class XmlUtilTest {
     }
 
     @Test
+    public void xmlAdaptedTaskFromFile_fileWithMissingTaskField_validResult() throws Exception {
+        XmlAdaptedTask actualTask = XmlUtil.getDataFromFile(
+                MISSING_TASK_FIELD_FILE, XmlAdaptedTaskWithRootElement.class);
+        LocalDateTime validDateTime = TaskUtil.toLocalDateAndTime(VALID_DATEANDTIME);
+        XmlAdaptedTask expectedTask = new XmlAdaptedTask(
+                null, VALID_DURATION, validDateTime);
+        assertEquals(expectedTask, actualTask);
+    }
+
+    @Test
     public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
                 INVALID_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
@@ -94,12 +118,32 @@ public class XmlUtilTest {
     }
 
     @Test
+    public void xmlAdaptedTaskFromFile_fileWithInvalidTaskField_validResult() throws Exception {
+        XmlAdaptedTask actualTask = XmlUtil.getDataFromFile(
+                INVALID_TASK_FIELD_FILE, XmlAdaptedTaskWithRootElement.class);
+        LocalDateTime validDateTime = TaskUtil.toLocalDateAndTime(VALID_DATEANDTIME);
+        XmlAdaptedTask expectedTask = new XmlAdaptedTask(
+                VALID_DESCRIPTION, INVALID_DURATION, validDateTime);
+        assertEquals(expectedTask, actualTask);
+    }
+
+    @Test
     public void xmlAdaptedPersonFromFile_fileWithValidPerson_validResult() throws Exception {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
                 VALID_PERSON_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
                 VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
+    }
+
+    @Test
+    public void xmlAdaptedTaskFromFile_fileWithValidTaskField_validResult() throws Exception {
+        XmlAdaptedTask actualTask = XmlUtil.getDataFromFile(
+                VALID_TASK_FILE, XmlAdaptedTaskWithRootElement.class);
+        LocalDateTime validDateTime = TaskUtil.toLocalDateAndTime(VALID_DATEANDTIME);
+        XmlAdaptedTask expectedTask = new XmlAdaptedTask(
+                VALID_DESCRIPTION, VALID_DURATION, validDateTime);
+        assertEquals(expectedTask, actualTask);
     }
 
     @Test
@@ -143,4 +187,7 @@ public class XmlUtilTest {
      */
     @XmlRootElement(name = "person")
     private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}
+
+    @XmlRootElement(name = "task")
+    private static class XmlAdaptedTaskWithRootElement extends XmlAdaptedTask {}
 }

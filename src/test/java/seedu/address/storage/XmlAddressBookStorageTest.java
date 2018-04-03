@@ -5,7 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTasks.EXAMPLE1;
+import static seedu.address.testutil.TypicalTasks.EXAMPLE2;
+import static seedu.address.testutil.TypicalTasks.EXAMPLE3;
 
 import java.io.IOException;
 
@@ -18,6 +20,8 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalTasks;
 
 public class XmlAddressBookStorageTest {
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("./src/test/data/XmlAddressBookStorageTest/");
@@ -67,15 +71,27 @@ public class XmlAddressBookStorageTest {
     }
 
     @Test
+    public void readAddressBook_invalidTaskAddressBook_throwDataConversionException() throws Exception {
+        thrown.expect(DataConversionException.class);
+        readAddressBook("invalidTaskAddressBook.xml");
+    }
+
+    @Test
     public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
         readAddressBook("invalidAndValidPersonAddressBook.xml");
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAddressBook_invalidAndValidTaskAddressBook_throwDataConversionException() throws Exception {
+        thrown.expect(DataConversionException.class);
+        readAddressBook("invalidAndValidTaskAddressBook.xml");
+    }
+
+    @Test
+    public void readAndSaveAddressBook_allInOrder_personSuccess() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
-        AddressBook original = getTypicalAddressBook();
+        AddressBook original = TypicalPersons.getTypicalAddressBook();
         XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
 
         //Save in new file and read back
@@ -92,6 +108,32 @@ public class XmlAddressBookStorageTest {
 
         //Save and read without specifying file path
         original.addPerson(IDA);
+        xmlAddressBookStorage.saveAddressBook(original); //file path not specified
+        readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
+        assertEquals(original, new AddressBook(readBack));
+
+    }
+
+    @Test
+    public void readAndSaveAddressBook_allInOrder_taskSuccess() throws Exception {
+        String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
+        AddressBook original = TypicalTasks.getTypicalAddressBook();
+        XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
+
+        //Save in new file and read back
+        xmlAddressBookStorage.saveAddressBook(original, filePath);
+        ReadOnlyAddressBook readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        assertEquals(original, new AddressBook(readBack));
+
+        //Modify data, overwrite exiting file, and read back
+        original.addTask(EXAMPLE2);
+        original.removeTask(EXAMPLE1);
+        xmlAddressBookStorage.saveAddressBook(original, filePath);
+        readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        assertEquals(original, new AddressBook(readBack));
+
+        //Save and read without specifying file path
+        original.addTask(EXAMPLE3);
         xmlAddressBookStorage.saveAddressBook(original); //file path not specified
         readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
         assertEquals(original, new AddressBook(readBack));
@@ -120,6 +162,5 @@ public class XmlAddressBookStorageTest {
         thrown.expect(NullPointerException.class);
         saveAddressBook(new AddressBook(), null);
     }
-
 
 }
