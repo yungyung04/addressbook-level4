@@ -97,7 +97,7 @@ public class XmlUtilTest {
                 null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
-
+    /*
     @Test
     public void xmlAdaptedTaskFromFile_fileWithMissingTaskField_validResult() throws Exception {
         XmlAdaptedTask actualTask = XmlUtil.getDataFromFile(
@@ -107,7 +107,7 @@ public class XmlUtilTest {
                 null, VALID_DURATION, validDateTime);
         assertEquals(expectedTask, actualTask);
     }
-
+    */
     @Test
     public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
