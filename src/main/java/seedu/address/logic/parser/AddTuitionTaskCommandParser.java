@@ -102,7 +102,7 @@ public class AddTuitionTaskCommandParser implements Parser<AddTuitionTaskCommand
             throw new DurationParseException(dpe.getMessage());
         }
         if (isTaskClash(taskDateTime, duration)) {
-            throw new TimingClashException(MESSAGE_TASK_TIMING_CLASHES);
+            throw new TimingClashException();
         }
     }
 

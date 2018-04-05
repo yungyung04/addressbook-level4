@@ -86,7 +86,7 @@ public class AddPersonalTaskCommandParser implements Parser<AddPersonalTaskComma
             throw new DurationParseException(dpe.getMessage());
         }
         if (isTaskClash(taskDateTime, duration)) {
-            throw new TimingClashException(MESSAGE_TASK_TIMING_CLASHES);
+            throw new TimingClashException();
         }
     }
 
