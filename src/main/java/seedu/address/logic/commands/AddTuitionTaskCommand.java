@@ -11,6 +11,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicateTaskException;
+import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.tutee.TuitionSchedule;
 import seedu.address.model.tutee.TuitionTask;
 import seedu.address.model.tutee.Tutee;
@@ -66,7 +68,13 @@ public class AddTuitionTaskCommand extends UndoableCommand {
     @Override
     public CommandResult executeUndoableCommand() {
         tuitionSchedule.addTask(toAdd);
-        model.addTask(toAdd);
+        try {
+            model.addTask(toAdd);
+        } catch (DuplicateTaskException a) {
+            System.out.println("Duplicate problem"); // This needs to be replaced with an exception call
+        } catch (TimingClashException b) {
+            System.out.println("Timing clash problem"); // This needs to be replaced with an exception call
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

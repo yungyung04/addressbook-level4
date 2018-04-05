@@ -68,7 +68,7 @@ public class AddPersonalTaskCommandParser implements Parser<AddPersonalTaskComma
      */
     private void checkTimeClash(LocalDateTime taskDateTime, String duration) throws TimingClashException {
         if (isTaskClash(taskDateTime, duration)) {
-            throw new TimingClashException(MESSAGE_TASK_TIMING_CLASHES);
+            throw new TimingClashException();
         }
     }
 }
