@@ -28,7 +28,7 @@ import seedu.address.model.TaskContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.person.exceptions.TaskNotFoundException;
+import seedu.address.model.task.exceptions.TaskNotFoundException;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**

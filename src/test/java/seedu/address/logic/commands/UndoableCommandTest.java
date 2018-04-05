@@ -18,7 +18,7 @@ import seedu.address.model.Task;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.person.exceptions.TaskNotFoundException;
+import seedu.address.model.task.exceptions.TaskNotFoundException;
 
 public class UndoableCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
