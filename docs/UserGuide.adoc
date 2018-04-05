@@ -113,8 +113,6 @@ Format: `lt`
 Shows a list of all tutees in the address book. +
 Using Command Word: +
 Format: `list` +
-Using Command Alias: +
-Format: `l`
 
 === Editing a person : `edit`
 
@@ -130,7 +128,7 @@ Format: `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
-* This command is able to edit the general details of a tutee but is unable to edit tutee's specific details, namely : Education Level, Grade, School and Subject.
+* This command is able to edit the general details of a tutee (as shown in the command format) but is unable to edit tutee's specific details, namely : Education Level, Grade, School and Subject.
 ****
 
 Examples:
