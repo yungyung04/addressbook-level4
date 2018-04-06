@@ -351,7 +351,6 @@ public class SameTimeUnitException extends Exception {
         }
         return trimmedTimeUnit;
     }
-
 ```
 ###### \java\seedu\address\model\person\exceptions\DurationParseException.java
 ``` java
@@ -499,10 +498,12 @@ public class PersonalTask implements Task {
                 && description.equals(((PersonalTask) other).description));
     }
     */
+
 }
 ```
 ###### \java\seedu\address\model\Schedule.java
 ``` java
+
 /**
  * Wraps the data of all existing tasks.
  */

@@ -43,10 +43,6 @@ public class AddPersonalTaskCommand extends UndoableCommand {
                 || (other instanceof AddPersonalTaskCommand // instanceof handles nulls
                 && toAdd.equals(((AddPersonalTaskCommand) other).toAdd));
     }
-}
-```
-###### \java\seedu\address\logic\commands\AddTuitionTaskCommand.java
-``` java
 
 /**
  * Adds a tuition (task) into the schedule.
@@ -610,6 +606,12 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
         return new FindTaskCommand(filterCategory, keywords);
     }
 
+    /**
+     * Parses month keywords into the required form for the purpose of creating a FindTaskCommand
+     * @throws ParseException if the given input type is not recognized.
+     * @throws DateTimeParseException if any of the keywords given is an invalid month
+     * @throws InvalidBoundariesException if the given keywords are invalid boundary values
+     */
     private String[] parseMonthKeywords(String inputType, String[] keywords) throws ParseException,
             DateTimeParseException, InvalidBoundariesException {
         int[] months;
