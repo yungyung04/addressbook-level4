@@ -83,8 +83,7 @@ Using Command Word: +
 Format: `addtutee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT g/GRADE edu/EDUCATION_LEVEL sch/SCHOOL [t/TAG]...`
 
 [TIP]
-A tutee can have any number of tags (including 0) +
-A tutee is a person, but a person is not a tutee.
+A tutee can have any number of tags (including 0)
 
 Examples:
 
@@ -164,11 +163,11 @@ Format: `f CATEGORY KEYWORD [MORE_KEYWORDS]` +
 
 Examples:
 
-* `findpersonby Name John` +
+* `find Name John` +
 Lists `john` and `John Doe`
-* `findpersonby name Betsy Tim John` +
+* `f name Betsy Tim John` +
 Lists any person having names `Betsy`, `Tim`, or `John`
-* `f grade B B+` +
+* `find grade B B+` +
 Lists all tutee with grade `B` and `B+`
 
 === Sorting persons by category: `sort`
@@ -373,11 +372,11 @@ Any amount can be provided. If *0* keyword is given, the displayed task list wil
 
 Examples:
 
-* `findtaskby month between january Mar` +
+* `find month between january Mar` +
 Lists all tasks scheduled between January and March.
-* `findtaskby month between November February` +
+* `find month between November February` +
 Lists all tasks scheduled on November, December, January and February.
-* `findtaskby month namely 2 06 oct
+* `f month namely 2 06 oct
 Lists all tasks scheduled on February, June and October.
 
 === Changing calendar view page time unit: `change`
