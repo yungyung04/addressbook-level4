@@ -2,5 +2,5 @@
 <!-- Task with a missing duration field -->
 <tasks>
     <description>exampleTask1</description>
-    <dateandtime>02-05-2018T13:20</dateandtime>
+    <dateAndTime>02/03/2018 03:20</dateAndTime>
 </tasks>

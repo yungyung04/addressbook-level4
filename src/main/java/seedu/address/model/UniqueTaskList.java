@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
 /**
@@ -33,13 +34,12 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * Need to add an exception that functions well in the commented out code below to prevent duplicate tasks
      */
-    public void add(Task toAdd) /*throws DuplicatePersonException */ {
+    public void add(Task toAdd) throws DuplicateTaskException {
         requireNonNull(toAdd);
-        /*
+
         if (contains(toAdd)) {
-           throw new TimingClashException();
+            throw new DuplicateTaskException();
         }
-        */
         internalList.add(toAdd);
     }
 
@@ -49,16 +49,17 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      */
 
-    public void setTask(Task target, Task editedTask) {
+    public void setTask(Task target, Task editedTask)
+            throws DuplicateTaskException, TaskNotFoundException {
         requireNonNull(editedTask);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            System.out.println("Place Holder");
+            throw new TaskNotFoundException();
         }
 
         if (!target.equals(editedTask) && internalList.contains(editedTask)) {
-            System.out.println("Place Holder");
+            throw new DuplicateTaskException();
         }
 
         internalList.set(index, editedTask);
@@ -81,7 +82,7 @@ public class UniqueTaskList implements Iterable<Task> {
         this.internalList.setAll(replacement.internalList);
     }
 
-    public void setTasks(List<Task> tasks) /* throws DuplicatePersonException */ {
+    public void setTasks(List<Task> tasks) throws DuplicateTaskException {
         requireAllNonNull(tasks);
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final Task task : tasks) {

@@ -30,6 +30,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Task;
 import seedu.address.model.person.Person;
+import seedu.address.model.personal.PersonalTask;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -51,8 +52,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addPersonalTask() throws Exception {
-        Task task = new TaskBuilder().build();
+        PersonalTask task = (PersonalTask) new TaskBuilder().build();
         AddPersonalTaskCommand command = (AddPersonalTaskCommand) parser.parseCommand(TaskUtil.getAddTaskCommand(task));
+        assertEquals(new AddPersonalTaskCommand(task), command);
     }
 
     @Test

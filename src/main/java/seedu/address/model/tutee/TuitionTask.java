@@ -125,6 +125,21 @@ public class TuitionTask implements Task {
         return description != "";
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task otherTask = (Task) other;
+        return otherTask.getDescription().equals(this.getDescription())
+                && otherTask.getDuration().equals(this.getDuration())
+                && otherTask.getTaskDateTime().toString().equals(this.getTaskDateTime().toString());
+    }
     /**
      * fixes the test but has conflict with Task card
     @Override

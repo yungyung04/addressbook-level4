@@ -13,12 +13,12 @@ import seedu.address.model.person.exceptions.DuplicateTaskException;
  */
 public class TypicalTasks {
 
-    public static final Task EXAMPLE1 = new TaskBuilder().withDescription("exampleTask1").withDuration("03:20")
-            .withDateAndTime("02-05-2018 03:20").build();
-    public static final Task EXAMPLE2 = new TaskBuilder().withDescription("exampleTask2").withDuration("03:20")
-            .withDateAndTime("02-05-2018 13:20").build();
-    public static final Task EXAMPLE3 = new TaskBuilder().withDescription("exampleTask3").withDuration("03:20")
-            .withDateAndTime("02-05-2018 23:20").build();
+    public static final Task EXAMPLE1 = new TaskBuilder().withName(null).withDescription("exampleTask1").withDuration("3h20m")
+            .withDateAndTime("02/05/2018 03:20").build();
+    public static final Task EXAMPLE2 = new TaskBuilder().withName(null).withDescription("exampleTask2").withDuration("3h20m")
+            .withDateAndTime("02/05/2018 13:20").build();
+    public static final Task EXAMPLE3 = new TaskBuilder().withName(null).withDescription("exampleTask3").withDuration("3h20m")
+            .withDateAndTime("02/05/2018 23:20").build();
 
     private TypicalTasks() {} // prevents instantiation
     /**

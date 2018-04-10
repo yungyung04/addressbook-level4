@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,7 +21,7 @@ import seedu.address.storage.XmlAdaptedTask;
 import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TaskUtil;
+import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestUtil;
 
 
@@ -40,11 +39,11 @@ public class XmlUtilTest {
     private static final File VALID_TASK_FILE = new File(TEST_DATA_FOLDER + "validTask.xml");
     private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml"));
 
-    private static final String INVALID_DURATION = "3h2";
+    private static final String INVALID_DURATION = "3h2m";
 
     private static final String VALID_DURATION = "3h20m";
     private static final String VALID_DESCRIPTION = "exampleTask1";
-    private static final String VALID_DATEANDTIME = "02-05-2018T03:20";
+    private static final String VALID_DATEANDTIME = "02/03/2018 03:20";
 
     private static final String INVALID_PHONE = "9482asf424";
 
@@ -97,17 +96,16 @@ public class XmlUtilTest {
                 null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
-    /*
+
     @Test
     public void xmlAdaptedTaskFromFile_fileWithMissingTaskField_validResult() throws Exception {
         XmlAdaptedTask actualTask = XmlUtil.getDataFromFile(
                 MISSING_TASK_FIELD_FILE, XmlAdaptedTaskWithRootElement.class);
-        LocalDateTime validDateTime = TaskUtil.toLocalDateAndTime(VALID_DATEANDTIME);
         XmlAdaptedTask expectedTask = new XmlAdaptedTask(
-                null, VALID_DURATION, validDateTime);
+                "exampleTask1", null, VALID_DATEANDTIME);
         assertEquals(expectedTask, actualTask);
     }
-    */
+
     @Test
     public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
@@ -121,9 +119,8 @@ public class XmlUtilTest {
     public void xmlAdaptedTaskFromFile_fileWithInvalidTaskField_validResult() throws Exception {
         XmlAdaptedTask actualTask = XmlUtil.getDataFromFile(
                 INVALID_TASK_FIELD_FILE, XmlAdaptedTaskWithRootElement.class);
-        LocalDateTime validDateTime = TaskUtil.toLocalDateAndTime(VALID_DATEANDTIME);
         XmlAdaptedTask expectedTask = new XmlAdaptedTask(
-                VALID_DESCRIPTION, INVALID_DURATION, validDateTime);
+                VALID_DESCRIPTION, INVALID_DURATION, VALID_DATEANDTIME);
         assertEquals(expectedTask, actualTask);
     }
 
@@ -140,9 +137,8 @@ public class XmlUtilTest {
     public void xmlAdaptedTaskFromFile_fileWithValidTaskField_validResult() throws Exception {
         XmlAdaptedTask actualTask = XmlUtil.getDataFromFile(
                 VALID_TASK_FILE, XmlAdaptedTaskWithRootElement.class);
-        LocalDateTime validDateTime = TaskUtil.toLocalDateAndTime(VALID_DATEANDTIME);
         XmlAdaptedTask expectedTask = new XmlAdaptedTask(
-                VALID_DESCRIPTION, VALID_DURATION, validDateTime);
+                VALID_DESCRIPTION, VALID_DURATION, VALID_DATEANDTIME);
         assertEquals(expectedTask, actualTask);
     }
 
@@ -174,7 +170,7 @@ public class XmlUtilTest {
 
         AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
         dataToWrite = new XmlSerializableAddressBook(
-                builder.withPerson(new PersonBuilder().build()).withTag("Friends").build());
+                builder.withPerson(new PersonBuilder().build()).withTag("Friends").withTask(new TaskBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
@@ -188,6 +184,6 @@ public class XmlUtilTest {
     @XmlRootElement(name = "person")
     private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}
 
-    @XmlRootElement(name = "task")
+    @XmlRootElement(name = "tasks")
     private static class XmlAdaptedTaskWithRootElement extends XmlAdaptedTask {}
 }

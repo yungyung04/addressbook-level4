@@ -110,12 +110,32 @@ public class PersonalTask implements Task {
     }
 
     /**
+     * Returns true if the two tasks are equal. Needs to be updated to reflect the name parameter
+     */
+
+
+    /**
      * Returns true if the tuition task contains a non-empty description.
      */
     private boolean hasDescription() {
         return description != "";
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task otherTask = (Task) other;
+        return otherTask.getDescription().equals(this.getDescription())
+                && otherTask.getDuration().equals(this.getDuration())
+                && otherTask.getTaskDateTime().toString().equals(this.getTaskDateTime().toString());
+    }
     /**
      * this fixes the valid args test, but has conflict with Task card
     @Override

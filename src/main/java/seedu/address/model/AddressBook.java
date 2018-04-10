@@ -65,7 +65,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
-    public void setTasks(List<Task> tasks) {
+    public void setTasks(List<Task> tasks) throws DuplicateTaskException {
         this.tasks.setTasks(tasks);
     }
 
@@ -77,11 +77,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
         setTags(new HashSet<>(newData.getTagList()));
         List<Task> taskList = newData.getTaskList().stream().collect(Collectors.toList());
-        setTasks(taskList);
+
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
 
+        try {
+            setTasks(taskList);
+        } catch (DuplicateTaskException e) {
+            throw new AssertionError("AddressBooks should not have duplicate tasks");
+        }
         try {
             setPersons(syncedPersonList);
         } catch (DuplicatePersonException e) {
@@ -140,7 +145,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Updates a task to the address book.
      *
      */
-    public void updateTask(Task target, Task editedTask)    {
+    public void updateTask(Task target, Task editedTask)
+            throws DuplicateTaskException, TaskNotFoundException {
         requireNonNull(editedTask);
         tasks.setTask(target, editedTask);
     }

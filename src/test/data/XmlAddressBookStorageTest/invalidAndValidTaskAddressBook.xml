@@ -4,12 +4,12 @@
     <tasks>
         <description>exampleTask1</description>
         <duration>3h20m</duration>
-        <dateandtime>02-05-2018T03:20</dateandtime>
+        <dateandtime>02/05/2018 03:20</dateandtime>
     </tasks>
     <!-- Task with invalid duration field -->
     <tasks>
         <description>exampleTask1</description>
         <duration>3h2m</duration>
-        <dateandtime>02-05-2018T03:20</dateandtime>
+        <dateandtime>02/05/2018 03:20</dateandtime>
     </tasks>
 </addressbook>

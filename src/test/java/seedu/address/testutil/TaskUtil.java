@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 
 import seedu.address.logic.commands.AddPersonalTaskCommand;
 
@@ -11,6 +12,9 @@ import seedu.address.model.Task;
  * A utility class for Task. For now, this is customized to the personal task class
  */
 public class TaskUtil {
+
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     /**
      * Returns an add command string for adding the {@code person}.
@@ -34,7 +38,7 @@ public class TaskUtil {
      * Converts a date and time string to a local date time object
      */
     public static LocalDateTime toLocalDateAndTime(String sDateAndTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
         LocalDateTime lDateAndTime = LocalDateTime.parse(sDateAndTime, formatter);
         return lDateAndTime;
     }

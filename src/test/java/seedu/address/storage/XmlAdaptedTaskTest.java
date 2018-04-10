@@ -18,7 +18,7 @@ public class XmlAdaptedTaskTest {
     private static final String VALID_DESCRIPTION = "A description";
 
     private static final String VALID_DURATION = EXAMPLE1.getDuration();
-    private static final LocalDateTime VALID_DATEANDTIME = EXAMPLE1.getTaskDateTime(); //Double check this
+    private static final String VALID_DATEANDTIME = EXAMPLE1.getTaskDateTime().toString(); //Double check this
 
     @Test
     public void toModelType_validTaskDetails_returnsTask() throws Exception {
@@ -50,9 +50,8 @@ public class XmlAdaptedTaskTest {
 
     @Test
     public void toModelType_invalidDateAndTime_throwsIllegalValueException() {
-        LocalDateTime invalidInput = toLocalDateAndTime(INVALID_DATEANDTIME);
         XmlAdaptedTask task =
-                new XmlAdaptedTask(VALID_DESCRIPTION, VALID_DURATION, invalidInput);
+                new XmlAdaptedTask(VALID_DESCRIPTION, VALID_DURATION, INVALID_DATEANDTIME);
         String expectedMessage = "Invalid Duration";
         Assert.assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }

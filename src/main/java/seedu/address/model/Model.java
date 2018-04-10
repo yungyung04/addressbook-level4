@@ -57,7 +57,8 @@ public interface Model {
 
     void addTask (Task target) throws TimingClashException, DuplicateTaskException;
 
-    void updateTask(Task target, Task editedTask);
+    void updateTask(Task target, Task editedTask)
+            throws DuplicateTaskException, TaskNotFoundException;
 
     void deleteTask(Task target) throws TaskNotFoundException;
 
