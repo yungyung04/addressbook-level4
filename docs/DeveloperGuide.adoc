@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= TuitionConnect (TC) - Developer Guide
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -12,7 +12,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103JAN2018-T11-B1/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team MarvelousBook`      Since: `Feb 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -229,6 +229,72 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
+
+// tag::addtutee[]
+=== Add tutee Command
+==== Current Implementation
+
+===== Reason for Implementation
+As the user of this application is the tutor, he or she will need to add the tutees' contact details.
+Since a tutee contains more details specific to them compared to a non-tutee, tutee contacts should not be mixed with the non-tutee contacts so that all the contacts are organized and can be managed easily.
+Therefore, AddTuteeCommand is used to add only the tutees' contact details.
+
+===== How it is implemented
+The AddTuteeCommand is an extension of the Undoable Command, which is part of the Logic Component.
+As this command involves the altering of the application's state, the ability to undo and redo will make this command more user-friendly and efficient.
+(e.g list command + delete command vs undo command).
+
+image::LogicCommandClassDiagram.png[width="800"]
+
+From the diagram shown above, instead of extending abstract Command class directly, AddTuteeCommand will extend the abstract Undoable Command class like clearCommand and AddCommand.
+This allows AddTuteeCommand to use or override the state saving codes inside the Undoable Command class as shown below.
+
+[source,java]
+----
+public abstract class UndoableCommand extends Command {
+    @Override
+    public CommandResult execute() {
+        // ... undo logic ...
+
+        executeUndoableCommand();
+    }
+}
+
+public class AddTuteeCommand extends UndoableCommand {
+    @Override
+    public CommandResult executeUndoableCommand() {
+        // ... add tutee logic ...
+    }
+}
+----
+
+The following sequence diagram shows how the addtutee operation works:
+
+image::AddTuteeCommandSequenceDiagram.png[width="800"]
+
+As shown in the sequence diagram, after Tutee object has been created, it is being passed to Model. Model manager will add the Tutee object to the person list in TuitionConnect.
+By having a combined list of tutee and non-tutee, we can manage the contacts using one command, such as delete command, instead of having 1 command for tutee and 1 command for non-tutee.
+The combined list is achieved through the use of inheritance, whereby Tutee class inherits the Person class as shown in the diagram below.
+
+image:TuteeClassDiagram.jpg[width="800"]
+
+Since a tutee is a person, we can carried out inheritance by extending the Person class.
+Both Tutee and Person class objects have the same fields such as Name, Phone, Email and Address.
+However, Tutee class object has additional fields such as Subject, Grade, EducationLevel and School, which are irrelevant to a Person class object (non-tutee).
+
+[NOTE]
+If the person already exists, either as tutee or non-tutee, in the contact list, DuplicatePersonException will be thrown.
+
+==== Design Consideration
+
+* **Alternative 1 (current choice):** Create a new command "addtutee" and a tutee class, which extends person class
+** Pros: Non-tutee will not have any detail that is specific to tutee only. This saves memory especially when there are numerous non-tutee objects.
+** Cons: A tutee cannot simply convert into a non-tutee when tutor stops teaching him/her. Tutor has to delete the tutee and add him/her again as a non-tutee.
+
+* **Alternative 2:** Modify the current AddCommand and add more fields to the person class
+** Pros: Features can be implemented easily without modifying much to the existing code.
+** Cons: Non-tutee object creates unrelated field objects such as "subject" and "school" and these objects will waste the memory space. This problem will be significant when there are a lot of non-tutee objects.
+// end::addtutee[]
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -792,20 +858,59 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 === Feature Contribution
 
-. *AddTuteeCommand* [Major Enhancement]
+*Raymond*:
 
-As the user of this application is the tutor, he or she will need to add the tutees' contact details.
-Furthermore, tutee contacts should not be mixed with the non-tutee contacts so that all the contacts are organized and can be managed easily.
-Therefore, AddTuteeCommand is used to add only the tutees' contact details
+. *Support for Tasks (Major)*:
+.. *Delete task command*: Allows tutors to delete tasks.
+.. *Edit task command*: Tutors are allowed to edit their tasks, if necessary.
+.. *View task command*: Tutors are able to view their own task.
 
-The AddTuteeCommand is an extension of the Undoable Command, which is part of the Logic Component.
-As this command involves the altering of the application's state, the ability to undo and redo will make this command more user-friendly and efficient.
-(e.g list command + delete command vs undo command).
+With this added support for tasks, tutors will be able to customise their schedules more easily by some of these commands.
 
-image::LogicCommandClassDiagram.png[width="800"]
+*Chih Tun*:
 
-From the diagram shown above, instead of extending abstract Command class directly, AddTuteeCommand will extend the abstract Undoable Command class like clearCommand and AddCommand.
-This allows AddTuteeCommand to use or override the state saving codes inside the Undoable Command class as shown below.
+* *Major Enhancement*: Integrated a calendar into TuitionConnect using third party software, CalendarFX.
+Configured TuitionConnect's main window to display day, week, month or year view of the calendar. A daily agenda list is showed together with the calendar's day view.
+In addition, the calendar reflects any changes to the schedule such as adding of a new task or deleting an existing task.
+
+* *Minor Enhancement*:
+. Created command to add a new tutee.
+. Implemented tutee, tuition, personal task classes and relevant field classes to support all the commands.
+. Modify select command to conduct name search on google search pop up page.
+
+
+*Buyung*:
+
+. *ViewFiltered & View Sort* [Major Enhancement]
+This command lets tutors to view a filtered list of their stored tasks. As there are 2 kinds of tasks implemented in Tuition Connect,
+personal and tuition task, each kind of task has its own filter category.
+Within the current version, Tutors are able to utilize one of these filtering.
+First, tutors can filter their tasks by month, hence, allowing tutors to view all of their task within the specified month.
+Second, tutors can filter their tutee by the tutee's school, grade or subject.
+
+For the purpose of illustrating the implementation, this sequence diagram depicts the procedure when
+user desires to view a list of their tutee after being filtered by grade.
+
+image::viewFiltered-sequence-diagram.jpeg[width="800"]
+
+This view filter command is created with the purpose of simplifying tutor's life in navigating through their packed schedule.
+By having this command, tutors are able to locate their desired tasks easily.
+
+Within future version, this command would have a sorting capability. The filtered tutee
+shall be displayed after their name is sorted lexicographically.
+
+*Anas*:
+
+. *CompleteCommand* [Major Enhancement]
+
+An important feature for the tutor is the ability to manage financial records that pertain to his/her work.
+To that end, the CompleteCommand functionality is implemented. This feature allows the user to update the amount
+of work completed and the financial compensation he/she is entitled based on the units of work completed.
+
+The CompleteCommand is an extension of the Undoable Command, which is part of the logic component.
+Much like many other commands in this application, the CompleteCommand was chosen to extend the undoable command, instead of the command, class in order
+to provide users with the flexibility to undo any unwanted commands. In summary, the CompleteCommand will extend the undoable command class which, itself,
+extends the command class.
 
 [source,java]
 ----
@@ -818,28 +923,27 @@ public abstract class UndoableCommand extends Command {
     }
 }
 
-public class AddTuteeCommand extends UndoableCommand {
+public class CompleteCommand extends UndoableCommand {
     @Override
     public CommandResult executeUndoableCommand() {
-        // ... add tutee logic ...
+        // ... add Complete logic ...
     }
 }
 ----
 
-The following sequence diagram shows how the addtutee operation works:
+Note: The above snippet will be updated when the complete code for this command is completed.
 
-image::AddTuteeCommandSequenceDiagram.png[width="800"]
+The following diagram demonstrates the functioning of the CompleteCommand operation:
 
-[NOTE]
-If there is already someone, either tutee or non tutee, in the contact list, DuplicatePersonException will be thrown.
+image::LogicCompleteCommandClassDiagram.jpg[width="800"]
 
-*Alternatives*
+Essentially, the complete command will work by receiving an object of type task as its parameter and "marking" this task as completed.
 
-. Modify the current AddCommand:
+. *ViewTutee* [Minor(?) Enhancement]
 
-The AddCommand will be able to read 2 different user inputs, either "add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney"
-or "add tutee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 s/Science g/B+ edu/Secondary sch/HelloWord Secondary School".
-The input string will be parsed at AddCommandParser. Tutee and non-tutee contacts will then be added similarly as the AddTuteeCommand and the original AddCommand.
+This feature allows the tutor to look at his/her current list of students. The idea behind this feature is for it to allow the tutor to
+see all the potential subscribers to his/her lessons and, by doing so, allowing them to associate these tutees with user-generated tasks.
+This feature is inspired by the "resources" concept in Microsoft Project whereby a "resource" is assigned to a work task.
 
 [appendix]
 == User Stories
@@ -851,59 +955,67 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |user |add a new person |update my list of contacts
 
 |`* * *` |user |delete a person |remove entries that I no longer need
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
-|`* * *` |tutor |list schedule I have in certain month |check and prepare myself in advance
+|`* * *` |tutor |add a new tuition |so that I can compile my tuition schedule
 
-|`* * *` |tutor |add a new tuition schedule |so that I can compile my tuition schedule
+|`* * *` |user |add my personal task to the calendar |prevent any task from clashing
 
-|`* * *` |user |delete a schedule in the calendar |update my calender
+|`* * *` |user |delete a task in the calendar |update my calender
 
-|`* * *` |tutor |tag the tutee with their current education level |adjust my teaching accordingly
+|`* * *` |user |edit a task in the calendar |update my calendar
+
+|`* * *` |tutor |list tasks I have in certain month |check and prepare myself in advance
+
+|`* * *` |tutor |add a contact as my tutee |separate my tutee from my personal contact lists
+
+|`* * *` |tutor |add subject grade of the tutees |keep track of his progress
+
+|`* * *` |tutor |add tutee's current education level |adjust my teaching accordingly
 
 |`* * *` |tutor |edit tutee's details |stay updated
 
-|`* * *` |user |edit a schedule |update my calendar
+|`* * *` |user |use a calendar |manage my schedule effectively
 
-|`* * *` |user |open the calender |check on my schedule
+|`* * *` |user |have a calender on application main window |view my schedule easily
 
-|`* * *` |user |submit feedback to the developers of the application |this application can be further improved
+|`* * *` |tutor |change the calendar view page |view my schedule in terms of day, month, week or year
 
-|`* * *` |user |add my personal schedule to the calendar |prevent any schedule from clashing
+|`* *` |tutor |sort my contact list by various categories |locate my contacts that have same characteristics easily
 
-|`* * *` |tutor |categorize a contact as my tutee |separate my tutee from my personal contact lists
+|`* *` |tutor |list tutees who are learning same subject |determine the amount of tuition material copies to be printed
 
-|`* *` |tutor |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
-
-|`* *` |tutor |measure the retention rate of my tutoring service |improve on myself and use it as my tuition credential
-
-|`* *` |user |track my work hours over a specific interval of time |maintain a good work life balance
-
-|`* *` |user |receive payments for my services electronically |receive payment more conveniently
-
-|`* *` |tutor |track the tuition payment |know who has not paid
-
-|`* *` |tutor |integrate my calendar with the school's calendar |prevent clashes between tuition schedule and tutees' school commitment
-
-|`* *` |tutor with many tutees |send messages to all tutees that meet a certain description |inform tutees together and not one by one
-
-|`* *` |tutor |add subject grade of the tutees |keep track of his progress
+|`* *` |tutor |list tutees with same education level |navigate within TuitionConnect easily
 
 |`* *` |tutor |list tutees coming from the same school |so that I can gather and spread useful information among these students.
 
 |`* *` |tutor |list tutees based on their grades |give more tuition to tutees who are doing badly
 
-|`* *` |tutor |give assignments(done and to-be-done) to a tutee |track his work and progress easily
+|`* *` |tutor with many tutees |send messages to all tutee with same description |disperse messages easily
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* *` |user |submit feedback to the developers of the application |this application can be further improved
+
+|`* *` |tutor |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+
+|`* *` |user |track my work hours over a specific interval of time |maintain a good work life balance
+
+|`* *` |tutor |track the tuition payment |know who has not paid
+
+|`* *` |tutor |add assignments(done and to-be-done) to a tutee |track his work and progress easily
+
+|`*` |tutor |measure the retention rate of my tutoring service |improve on myself and use it as my tuition credential
+
+|`*` |user |receive payments for my services electronically |receive payment more conveniently
 
 |`*` |tutor |take note of the name of my tutee's school teachers |adjust my teaching according to the school teacher.
 
-|`*` |tutor |insert my tutee's photo |
+|`*` |tutor |insert my tutee's photo |recognise new students easily
+
+|`*` |tutor |delete all finished task |remove them permanently
 |=======================================================================
 
 [appendix]
@@ -911,7 +1023,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 (For all use cases below, the *System* is the `TuitionConnect Application (TC)` and the *Actor* is the `user`, unless specified otherwise)
 
-[discrete]
 === Use case: UC01 - Delete person
 
 *MSS*
@@ -1080,9 +1191,6 @@ Use Case ends.
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `1.8.0_60` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `1.8.0_60` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  Users should prefer typing over mouse input or other input methods.
 .  Users should be comfortable using CLI apps.
 .  The app should not have flow flaws when running.
@@ -1093,6 +1201,9 @@ Use Case ends.
 
 [appendix]
 == Glossary
+
+[[address-book]] Address Book::
+An application for storing the contact details.
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
