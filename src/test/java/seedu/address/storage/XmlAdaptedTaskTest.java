@@ -13,7 +13,7 @@ import seedu.address.testutil.Assert;
 
 public class XmlAdaptedTaskTest {
     private static final String INVALID_DURATION = "3:20";
-    private static final String INVALID_DATEANDTIME = "2018-05-02";
+    private static final String INVALID_DATEANDTIME = "02/05/2018";
 
     private static final String VALID_DESCRIPTION = "A description";
 
@@ -52,14 +52,14 @@ public class XmlAdaptedTaskTest {
     public void toModelType_invalidDateAndTime_throwsIllegalValueException() {
         XmlAdaptedTask task =
                 new XmlAdaptedTask(VALID_DESCRIPTION, VALID_DURATION, INVALID_DATEANDTIME);
-        String expectedMessage = "Invalid Duration";
+        String expectedMessage = "Task's %s field is missing!";
         Assert.assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
     public void toModelType_nullDateAndTime_throwsIllegalValueException() {
         XmlAdaptedTask task = new XmlAdaptedTask(VALID_DESCRIPTION, VALID_DURATION, null);
-        String expectedMessage = "Date and Time cannot be left blank";
+        String expectedMessage = "Task's %s field is missing!";
         Assert.assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 

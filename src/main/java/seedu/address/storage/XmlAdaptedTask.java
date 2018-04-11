@@ -19,6 +19,7 @@ import seedu.address.model.tutee.TuitionTask;
 public class XmlAdaptedTask {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
+
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm")
             .withResolverStyle(ResolverStyle.STRICT);
 
