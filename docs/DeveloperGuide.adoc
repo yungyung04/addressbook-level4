@@ -932,13 +932,13 @@ public interface Task {
 ----
 // end::taskClass[]
 
-// tag::listTask[]
+// tag::listCommand[]
 . *listTask Command* [Minor Enhancement]
 
 This feature allows the user to see all tasks stored in the addressbook. It is useful when a user has entered a command
 that displays only a single task. If the user then wants to see other tasks, he/she can input listTask
 and display the tasks again.
-// end::listTask[]
+// end::listCommand[]
 [appendix]
 == User Stories
 
