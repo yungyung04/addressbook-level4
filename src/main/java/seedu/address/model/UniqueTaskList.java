@@ -19,45 +19,34 @@ import seedu.address.model.task.exceptions.TaskNotFoundException;
  * Supports a minimal set of list operations.
  *
  */
+//@@author a-shakra
 public class UniqueTaskList implements Iterable<Task> {
+    private static final String HOUR_DELIMITER = "h";
+    private static final String MINUTE_DELIMITER = "m";
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
+
 
     /**
      * Constructs empty TaskList.
      */
     public UniqueTaskList() {}
 
+    //@@author ChoChihTun
     /**
      * Adds a task to the list.
      *
-     * Need to add an exception that functions well in the commented out code below to prevent duplicate tasks
+     * @throws TimingClashException if there is a clash in timing with an existing task
      */
     public void add(Task toAdd) throws TimingClashException {
         requireNonNull(toAdd);
-        checkTimeClash(toAdd.getTaskDateTime(), toAdd.getDuration());
+        if (isTimeClash(toAdd.getTaskDateTime(), toAdd.getDuration())) {
+            throw new TimingClashException(MESSAGE_TASK_TIMING_CLASHES);
+        }
         internalList.add(toAdd);
     }
-
-    /**
-     * Replaces the task {@code target} in the list with {@code editedTask}.
-     *
-     */
-    public void setTask(Task target, Task editedTask) {
-        requireNonNull(editedTask);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            System.out.println("Place Holder");
-        }
-
-        if (!target.equals(editedTask) && internalList.contains(editedTask)) {
-            System.out.println("Place Holder");
-        }
-
-        internalList.set(index, editedTask);
-    }
-
+    //@@author
+    //@@author a-shakra
     /**
      * Removes the equivalent task from the list.
      *
@@ -97,9 +86,8 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @param startDateTime start date and time of new task
      * @param duration duration of new task
-     * @throws TimingClashException if there is a clash in the task timing
      */
-    private void checkTimeClash(LocalDateTime startDateTime, String duration) throws TimingClashException {
+    private boolean isTimeClash(LocalDateTime startDateTime, String duration) {
         LocalDateTime taskEndTime = getTaskEndTime(duration, startDateTime);
 
         for (Task recordedTask : internalList) {
@@ -111,17 +99,18 @@ public class UniqueTaskList implements Iterable<Task> {
                     && !(taskEndTime.equals(startTimeOfRecordedTask)
                     || startDateTime.equals(endTimeOfRecordedTask));
             if (isClash) {
-                throw new TimingClashException(MESSAGE_TASK_TIMING_CLASHES);
+                return true;
             }
         }
+        return false;
     }
 
     /**
      * Returns date and time when the task ends
      */
     private static LocalDateTime getTaskEndTime(String duration, LocalDateTime startDateTime) {
-        int indexOfHourDelimiter = duration.indexOf("h");
-        int indexOfMinuteDelimiter = duration.indexOf("m");
+        int indexOfHourDelimiter = duration.indexOf(HOUR_DELIMITER);
+        int indexOfMinuteDelimiter = duration.indexOf(MINUTE_DELIMITER);
         int indexOfFirstDigitInMinute = indexOfHourDelimiter + 1;
         int hoursInDuration = Integer.parseInt(duration.substring(0, indexOfHourDelimiter));
         int minutesInDuration = Integer.parseInt(duration.substring(indexOfFirstDigitInMinute, indexOfMinuteDelimiter));
@@ -131,7 +120,7 @@ public class UniqueTaskList implements Iterable<Task> {
         return taskEndTime;
     }
     //@@author
-
+    //@@author a-shakra
     @Override
     public Iterator<Task> iterator() {
         return internalList.iterator();

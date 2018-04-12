@@ -1,11 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_TASK_TIMING_CLASHES;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -48,7 +46,6 @@ public class AddTuitionTaskCommand extends UndoableCommand {
     private final String description;
 
     private TuitionTask toAdd;
-    //private Tutee associatedTutee;
     private String associatedTutee;
 
     /**
@@ -64,22 +61,21 @@ public class AddTuitionTaskCommand extends UndoableCommand {
         this.description = description;
     }
 
+    //@@author ChoChihTun
     @Override
     public CommandResult executeUndoableCommand() throws CommandException {
         try {
             model.addTask(toAdd);
-        } catch (TimingClashException e) {
-            throw new CommandException(MESSAGE_TASK_TIMING_CLASHES);
+        } catch (TimingClashException tce) {
+            throw new CommandException(tce.getMessage());
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    //@@author yungyung04
     @Override
     protected void preprocessUndoableCommand() throws CommandException {
         associatedTutee = getAssociatedTutee().getName().fullName;
-        //associatedTutee = getAssociatedTutee();
-        //requireNonNull(associatedTutee.getTuitionSchedule());
-        //tuitionSchedule = associatedTutee.getTuitionSchedule();
         toAdd = new TuitionTask(associatedTutee, taskdateTime, duration, description);
     }
 
@@ -92,6 +88,7 @@ public class AddTuitionTaskCommand extends UndoableCommand {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+        requireNonNull(lastShownList.get(targetIndex.getZeroBased()));
         Person associatedPerson = lastShownList.get(targetIndex.getZeroBased());
         if (!(associatedPerson instanceof Tutee)) {
             throw new CommandException(Messages.MESSAGE_INVALID_TUTEE_INDEX);
@@ -103,6 +100,10 @@ public class AddTuitionTaskCommand extends UndoableCommand {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddTuitionTaskCommand // instanceof handles nulls
-                && Objects.equals(this.toAdd, ((AddTuitionTaskCommand) other).toAdd));
+                && targetIndex.equals(((AddTuitionTaskCommand) other).targetIndex))
+                && taskdateTime.equals(((AddTuitionTaskCommand) other).taskdateTime)
+                && duration.equals(((AddTuitionTaskCommand) other).duration)
+                && description.equals(((AddTuitionTaskCommand) other).description);
+
     }
 }
