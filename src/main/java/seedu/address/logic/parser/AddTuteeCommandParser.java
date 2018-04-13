@@ -61,9 +61,7 @@ public class AddTuteeCommandParser implements Parser<AddTuteeCommand> {
             EducationLevel educationLevel = ParserUtil.parseEducationLevel(
                     argMultimap.getValue(PREFIX_EDUCATION_LEVEL)).get();
             School school = ParserUtil.parseSchool(argMultimap.getValue(PREFIX_SCHOOL)).get();
-            Set<Tag> tagList = new HashSet<>();
-            tagList.add(new Tag("Tutee"));
-            tagList.addAll(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)));
+            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
             Tutee person = new Tutee(name, phone, email, address, subject, grade, educationLevel, school, tagList);
             return new AddTuteeCommand(person);

@@ -11,6 +11,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutee.EducationLevel;
+import seedu.address.model.tutee.Grade;
+import seedu.address.model.tutee.School;
+import seedu.address.model.tutee.Subject;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -70,6 +74,42 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(new Address(address));
         return this;
     }
+
+    //@@author ChoChihTun
+    /**
+     * Sets the {@code Subject} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSubject(String subject) {
+        descriptor.setSubject(new Subject(subject));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Grade} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withGrade(String grade) {
+        descriptor.setGrade(new Grade(grade));
+        return this;
+    }
+
+
+    /**
+     * Sets the {@code EducationLevel} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEducationLevel(String educationLevel) {
+        descriptor.setEducationLevel(new EducationLevel(educationLevel));
+        return this;
+    }
+
+
+    /**
+     * Sets the {@code School} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSchool(String school) {
+        descriptor.setSchool(new School(school));
+        return this;
+    }
+    //@@author
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}

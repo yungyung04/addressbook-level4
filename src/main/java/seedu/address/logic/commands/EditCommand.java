@@ -57,6 +57,7 @@ public class EditCommand extends UndoableCommand {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    private static final String MESSAGE_INVALID_FIELD_TO_EDIT = "This person is not a tutee.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -99,6 +100,9 @@ public class EditCommand extends UndoableCommand {
 
         personToEdit = lastShownList.get(index.getZeroBased());
         editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        if (!(personToEdit instanceof Tutee) && !editPersonDescriptor.isTuteeFieldNull()) {
+            throw new CommandException(MESSAGE_INVALID_FIELD_TO_EDIT);
+        }
     }
 
     /**
@@ -120,7 +124,6 @@ public class EditCommand extends UndoableCommand {
             EducationLevel updatedEducationalLevel = editPersonDescriptor.getEducationalLevel()
                     .orElse(((Tutee) personToEdit).getEducationLevel());
             School updatedSchool = editPersonDescriptor.getSchool().orElse(((Tutee) personToEdit).getSchool());
-
             return new Tutee(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSubject, updatedGrade,
                     updatedEducationalLevel, updatedSchool, updatedTags);
         }
@@ -228,7 +231,6 @@ public class EditCommand extends UndoableCommand {
             return Optional.ofNullable(subject);
         }
 
-
         public void setGrade(Grade grade) {
             this.grade = grade;
         }
@@ -236,6 +238,7 @@ public class EditCommand extends UndoableCommand {
         public Optional<Grade> getGrade() {
             return Optional.ofNullable(grade);
         }
+
         public void setEducationLevel(EducationLevel educationLevel) {
             this.educationLevel = educationLevel;
         }
@@ -243,6 +246,7 @@ public class EditCommand extends UndoableCommand {
         public Optional<EducationLevel> getEducationalLevel() {
             return Optional.ofNullable(educationLevel);
         }
+
         public void setSchool(School school) {
             this.school = school;
         }
@@ -268,6 +272,21 @@ public class EditCommand extends UndoableCommand {
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
+
+        //@@author ChoChihTun
+        /**
+         * Checks if the tutee fields are null
+         *
+         * @return true if ALL the fields are null
+         *         false if at least 1 field is not null
+         */
+        public boolean isTuteeFieldNull() {
+            return subject == null
+                    && grade == null
+                    && educationLevel == null
+                    && school == null;
+        }
+        //@@author
 
         @Override
         public boolean equals(Object other) {
