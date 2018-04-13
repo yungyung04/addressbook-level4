@@ -133,6 +133,33 @@ public class TuitionTask implements Task {
         return !description.equals(NULL_STRING);
     }
 
+    /**
+     * fixes the test but has conflict with Task card
+     * I, a-shakra, didn't write this, but kept it here because i
+     * don't know the reason for it
+    */
+    //@@author a-shakra
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task otherTask = (Task) other;
+        return otherTask.getDescription().equals(this.getDescription())
+                && otherTask.getDuration().equals(this.getDuration())
+                && otherTask.getTaskDateTime().toString().equals(this.getTaskDateTime().toString());
+    }
+    //@@author
+    /**
+     * fixes the test but has conflict with Task card
+     * This is the old equals methods
+    */
+    /*
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -142,7 +169,7 @@ public class TuitionTask implements Task {
                 && duration.equals(((TuitionTask) other).duration)
                 && description.equals(((TuitionTask) other).description));
     }
-
+    */
     public String getTuitionTitle() {
         return String.format(TUITION_TITLE, tutee);
     }

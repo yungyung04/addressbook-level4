@@ -114,7 +114,7 @@ public class AddPersonalTaskCommandTest {
     private class ModelStubThrowingTimingClashException extends ModelStub {
         @Override
         public void addTask(Task task) throws TimingClashException {
-            throw new TimingClashException(MESSAGE_TASK_TIMING_CLASHES);
+            throw new TimingClashException();
         }
 
         @Override
