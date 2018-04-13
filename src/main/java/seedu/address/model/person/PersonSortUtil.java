@@ -70,7 +70,7 @@ public class PersonSortUtil {
                 } else if (areNotTutees(person1, person2)) {
                     result = compareNameLexicographically(person1, person2);
                 } else {
-                    assert (false); //should never reach this statement
+                    assert (false); //should never reach this statement -> works as safety measure
                 }
                 return result;
             }
