@@ -4,11 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static seedu.address.model.person.PersonSortUtil.CATEGORY_NAME;
 import static seedu.address.model.person.PersonSortUtil.getComparator;
 
+import java.util.Comparator;
+
 import org.junit.Test;
+
 import seedu.address.model.tutee.Tutee;
 import seedu.address.testutil.TuteeBuilder;
-
-import java.util.Comparator;
 
 //@@author yungyung04
 public class PersonSortUtilTest {
