@@ -27,6 +27,11 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutee.EducationLevel;
+import seedu.address.model.tutee.Grade;
+import seedu.address.model.tutee.School;
+import seedu.address.model.tutee.Subject;
+import seedu.address.model.tutee.Tutee;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -109,6 +114,16 @@ public class EditCommand extends UndoableCommand {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
+        if (personToEdit instanceof Tutee) {
+            Subject updatedSubject = editPersonDescriptor.getSubject().orElse(((Tutee) personToEdit).getSubject());
+            Grade updatedGrade = editPersonDescriptor.getGrade().orElse(((Tutee) personToEdit).getGrade());
+            EducationLevel updatedEducationalLevel = editPersonDescriptor.getEducationalLevel()
+                    .orElse(((Tutee) personToEdit).getEducationLevel());
+            School updatedSchool = editPersonDescriptor.getSchool().orElse(((Tutee) personToEdit).getSchool());
+
+            return new Tutee(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSubject, updatedGrade,
+                    updatedEducationalLevel, updatedSchool, updatedTags);
+        }
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
@@ -141,6 +156,10 @@ public class EditCommand extends UndoableCommand {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Subject subject;
+        private Grade grade;
+        private EducationLevel educationLevel;
+        private School school;
 
         public EditPersonDescriptor() {}
 
@@ -154,13 +173,18 @@ public class EditCommand extends UndoableCommand {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setSubject(toCopy.subject);
+            setGrade(toCopy.grade);
+            setEducationLevel(toCopy.educationLevel);
+            setSchool(toCopy.school);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(this.name, this.phone, this.email, this.address, this.tags);
+            return CollectionUtil.isAnyNonNull(this.name, this.phone, this.email, this.address, this.tags, this.subject,
+                    this.grade, this.educationLevel, this.school);
         }
 
         public void setName(Name name) {
@@ -194,6 +218,39 @@ public class EditCommand extends UndoableCommand {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
+
+        //@@author ChoChihTun
+        public void setSubject(Subject subject) {
+            this.subject = subject;
+        }
+
+        public Optional<Subject> getSubject() {
+            return Optional.ofNullable(subject);
+        }
+
+
+        public void setGrade(Grade grade) {
+            this.grade = grade;
+        }
+
+        public Optional<Grade> getGrade() {
+            return Optional.ofNullable(grade);
+        }
+        public void setEducationLevel(EducationLevel educationLevel) {
+            this.educationLevel = educationLevel;
+        }
+
+        public Optional<EducationLevel> getEducationalLevel() {
+            return Optional.ofNullable(educationLevel);
+        }
+        public void setSchool(School school) {
+            this.school = school;
+        }
+
+        public Optional<School> getSchool() {
+            return Optional.ofNullable(school);
+        }
+        //@@author
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
