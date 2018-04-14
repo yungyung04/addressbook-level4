@@ -158,7 +158,7 @@ The sections below give more details of each component.
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
+*API* : link:{https://github.com/CS2103JAN2018-T11-B1/main}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
@@ -181,7 +181,7 @@ image::LogicClassDiagram.png[width="800"]
 image::LogicCommandClassDiagram.png[width="800"]
 
 *API* :
-link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
+link:{https://github.com/CS2103JAN2018-T11-B1/main}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `AddressBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
@@ -193,34 +193,38 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
 
+// tag::classDiagram[]
 [[Design-Model]]
+
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
+image::ModelClassDiagram2.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
+*API* : link:{https://github.com/CS2103JAN2018-T11-B1/main}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Person>` and `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+// end::classDiagram[]
 
+// tag::storageDiagram[]
 [[Design-Storage]]
 === Storage component
 
 .Structure of the Storage Component
-image::StorageClassDiagram.png[width="800"]
+image::StorageClassDiagram2.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
+*API* : link:{https://github.com/CS2103JAN2018-T11-B1/main}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
-
+// end::storageDiagram[]
 [[Design-Commons]]
 === Common classes
 
@@ -232,8 +236,6 @@ This section describes some noteworthy details on how certain features are imple
 
 // tag::addtutee[]
 === Add tutee Command
-==== Current Implementation
-
 ===== Reason for Implementation
 As the user of this application is the tutor, he or she will need to add the tutees' contact details.
 Since a tutee contains more details specific to them compared to a non-tutee, tutee contacts should not be mixed with the non-tutee contacts so that all the contacts are organized and can be managed easily.
@@ -437,9 +439,9 @@ The following sequence diagram shows the general idea of how sort person command
 
 image::SortPersonSequenceDiagram.png[width="800"]
 
-As shown in the sequence diagram, the Logic command's call for execution leads to Sort Person command to request for a Comparator object from PersonSortUtil class.
+As shown in the sequence diagram, the Logic command's call for execution results in Sort Person command to request for a Comparator object from PersonSortUtil class.
 A comparator object is required since the sorting implementation utilizes JavaFX8's SortedList class.
-(Refer to https://docs.oracle.com/javase/8/javafx/api/javafx/collections/transformation/SortedList.html* for more information)
+(Refer to https://docs.oracle.com/javase/8/javafx/api/javafx/collections/transformation/SortedList.html for more information)
 Here, PersonSortUtil class is responsible in providing a suitable comparator that matches the sorting behaviour requested by the user. Upon receiving the comparator, SortPersonCommand
 calls the sortFilteredPersonList() method which utilises a SortedList object to perform the sorting.
 // end::sortpersoncommand[]

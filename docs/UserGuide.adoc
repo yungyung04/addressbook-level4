@@ -45,7 +45,7 @@ This app will not work with earlier versions of Java 8.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 // tag::ui_overview[]
-image::Ui_with_overview.jpg[width="790"]
+image::Ui_with_overview.jpg[width="400"]
 // end::ui_overview[]
 [NOTE]
 If "license check has failed" message pops up, simply click "OK".

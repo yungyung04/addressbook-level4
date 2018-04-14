@@ -43,11 +43,9 @@ include::../UserGuide.adoc[tag=ui_overview]
 
 include::../UserGuide.adoc[tag=conceptintro]
 
-include::../UserGuide.adoc[tag=findtask]
+include::../UserGuide.adoc[tag=addtuition]
 
 include::../UserGuide.adoc[tag=sorttask]
-
-include::../UserGuide.adoc[tag=deletetask]
 
 == Contributions to the Developer Guide
 
@@ -56,3 +54,7 @@ include::../UserGuide.adoc[tag=deletetask]
 |===
 
 include::../DeveloperGuide.adoc[tag=sortpersoncommand]
+
+include::../DeveloperGuide.adoc[tag=classDiagram]
+
+include::../DeveloperGuide.adoc[tag=storageDiagram]
