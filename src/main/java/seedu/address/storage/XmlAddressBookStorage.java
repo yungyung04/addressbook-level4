@@ -53,7 +53,7 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         }
         EncryptionUtil.decrypt(addressBookFile);
         XmlSerializableAddressBook xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
-        EncryptionUtil.encrypt(addressBookFile);
+        //EncryptionUtil.encrypt(addressBookFile);
 
         try {
             return Optional.of(xmlAddressBook.toModelType());
