@@ -66,6 +66,8 @@ public class ParserUtilTest {
     private static final String VALID_TASK_WITHOUT_DESCRIPTION = VALID_DATE + " " + VALID_TIME + " " + VALID_DURATION;
     private static final String VALID_TASK_WITH_DESCRIPTION = VALID_TASK_WITHOUT_DESCRIPTION + " " + VALID_DESCRIPTION;
 
+    private static final String TUTEE_TAG = "Tutee";
+    private static final String CAPITAL_TUTEE_TAG = "TUTEE";
     private static final String WHITESPACE = " \t\r\n";
     private static final int MAXIMUM_AMOUNT_OF_PARAMETERS = 4;
 
@@ -247,6 +249,7 @@ public class ParserUtilTest {
         assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
     }
 
+
     @Test
     public void parseTags_null_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
@@ -273,6 +276,78 @@ public class ParserUtilTest {
     }
 
     //@@author ChoChihTun
+    @Test
+    public void parseTags_collectionWithValidTagsAndTuteeTag_returnsTagSet() throws Exception {
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, CAPITAL_TUTEE_TAG));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(TUTEE_TAG)));
+
+        assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parsePersonTags_null_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parsePersonTags(null);
+    }
+
+    @Test
+    public void parsePersonTags_collectionWithInvalidTags_throwsIllegalValueException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        ParserUtil.parsePersonTags(Arrays.asList(VALID_TAG_1, INVALID_TAG));
+    }
+
+    @Test
+    public void parsePersonTags_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parsePersonTags(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parsePersonTags_collectionWithValidTags_returnsTagSet() throws Exception {
+        Set<Tag> actualTagSet = ParserUtil.parsePersonTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+
+        assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parsePersonTags_collectionWithTuteeTags_throwsIllegalValueException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        ParserUtil.parsePersonTags(Arrays.asList(VALID_TAG_1, TUTEE_TAG));
+    }
+
+    @Test
+    public void parseTuteeTags_null_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseTuteeTags(null);
+    }
+
+    @Test
+    public void parseTuteeTags_collectionWithInvalidTags_throwsIllegalValueException() throws Exception {
+        thrown.expect(IllegalValueException.class);
+        ParserUtil.parseTuteeTags(Arrays.asList(VALID_TAG_1, INVALID_TAG));
+    }
+
+    @Test
+    public void parseTuteeTags_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseTuteeTags(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseTuteeTags_collectionWithValidTags_returnsTagSet() throws Exception {
+        Set<Tag> actualTagSet = ParserUtil.parseTuteeTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+
+        assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTuteeTags_collectionWithValidAndTuteeTags_returnsTagSet() throws Exception {
+        Set<Tag> actualTagSet = ParserUtil.parseTuteeTags(Arrays.asList(VALID_TAG_1, TUTEE_TAG));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1)));
+
+        assertEquals(expectedTagSet, actualTagSet);
+    }
+
     @Test
     public void parseSubject_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSubject((String) null));
