@@ -1,22 +1,34 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Task;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicateTaskException;
+import seedu.address.model.person.exceptions.TimingClashException;
+import seedu.address.model.personal.PersonalTask;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutee.TuitionTask;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+    public static final String DATETIME1 = "03/04/2018 2:30";
+    public static final String DATETIME2 = "05/04/2018 2:30";
+    public static final String DATETIME3 = "07/04/2018 2:30";
+
+
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -39,15 +51,31 @@ public class SampleDataUtil {
                 getTagSet("colleagues"))
         };
     }
+
+    public static Task[] getSampleTasks() {
+        return new Task[]{
+            new PersonalTask(LocalDateTime.parse(DATETIME1), "2:30", "exampleTask1"),
+            new TuitionTask("Alice", LocalDateTime.parse(DATETIME2), "2:30", "exampleTask2"),
+            new PersonalTask(LocalDateTime.parse(DATETIME3), "2:30", "exampleTask3")
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         try {
             AddressBook sampleAb = new AddressBook();
             for (Person samplePerson : getSamplePersons()) {
                 sampleAb.addPerson(samplePerson);
             }
+            for (Task sampleTask : getSampleTasks()) {
+                sampleAb.addTask(sampleTask);
+            }
             return sampleAb;
         } catch (DuplicatePersonException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
+        } catch (DuplicateTaskException dte) {
+            throw new AssertionError("sample data cannot contain duplicate tasks", dte);
+        } catch (TimingClashException tce) {
+            throw new AssertionError("Timing clash detected", tce);
         }
     }
 
