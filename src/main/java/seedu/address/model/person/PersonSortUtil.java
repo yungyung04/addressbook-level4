@@ -3,7 +3,9 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.tutee.Tutee;
 
 //@@author yungyung04
@@ -18,6 +20,8 @@ public class PersonSortUtil {
     public static final String CATEGORY_SUBJECT = "subject";
     public static final int NEGATIVE_DIGIT = -1;
     public static final int POSITIVE_DIGIT = 1;
+
+    private static final Logger logger = LogsCenter.getLogger(PersonSortUtil.class);
 
     /**
      * Returns the apppropriate Person comparator given the sorting category.
@@ -43,6 +47,7 @@ public class PersonSortUtil {
             comparator = getSubjectComparator();
             break;
         default:
+            logger.severe("an invalid category is identified in PersonSOrtUtil class.");
             assert (false); //invalid sortCategory should be identified in parser.
         }
         return comparator;

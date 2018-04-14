@@ -2,7 +2,9 @@ package seedu.address.model.task;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Task;
 
 //@@author yungyung04
@@ -12,9 +14,10 @@ import seedu.address.model.Task;
 public class TaskSortUtil {
     public static final String CATEGORY_DATE_TIME = "datetime";
     public static final String CATEGORY_MONTH = "month";
-    public static final String CATEGORY_DURATION = "duration";
     public static final int NEGATIVE_DIGIT = -1;
     public static final int POSITIVE_DIGIT = 1;
+
+    private static final Logger logger = LogsCenter.getLogger(TaskSortUtil.class);
 
     /**
      * Returns the apppropriate Task comparator given the sorting category
@@ -30,6 +33,7 @@ public class TaskSortUtil {
             comparator = getDateTimeComparator();
             break;
         default:
+            logger.severe("an invalid category is identified in PersonSOrtUtil class.");
             assert (false); //invalid sortCategory should be identified in parser.
         }
         return comparator;
@@ -55,7 +59,7 @@ public class TaskSortUtil {
     }
 
     /**
-     * Returns a comparator which is useful for sorting tasks based on the date and time sequence in an increasing order.
+     * Returns a comparator which is useful for sorting tasks based on the date and time sequence in increasing order.
      */
     private static Comparator<Task> getDateTimeComparator() {
         return new Comparator<Task>() {
