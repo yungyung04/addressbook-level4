@@ -2,7 +2,7 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: TuitionConnect
+== PROJECT: Tuition Connect (TC)
 
 ---
 
@@ -43,18 +43,9 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 == Contributions to the User Guide
 
-
-|===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
-|===
-
-include::../UserGuide.adoc[listtask]
+include::../UserGuide.adoc[tag=listTask]
 
 == Contributions to the Developer Guide
-
-|===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
-|===
 
 include::../DeveloperGuide.adoc[tag=taskClass]
 

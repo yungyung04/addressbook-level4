@@ -54,4 +54,19 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">chicago ave</address>
     </persons>
+    <tasks>
+        <description>exampleTask1</description>
+        <duration>3h20m</duration>
+        <dateAndTime>02/05/2018 03:20</dateAndTime>
+    </tasks>
+    <tasks>
+        <description>exampleTask2</description>
+        <duration>3h20m</duration>
+        <dateAndTime>02/05/2018 13:20</dateAndTime>
+    </tasks>
+    <tasks>
+        <description>exampleTask3</description>
+        <duration>3h20m</duration>
+        <dateAndTime>02/05/2018 23:20</dateAndTime>
+    </tasks>
 </addressbook>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- AddressBook save file which contains the same Person values as in
+{@code TypicalPersons#getTypicalAddressBook()}-->
+<addressbook>
+    <tasks>
+        <description>exampleTask1</description>
+        <duration>3h20m</duration>
+        <dateandtime>02/05/2018 03:20</dateandtime>
+    </tasks>
+    <tasks>
+        <description>exampleTask2</description>
+        <duration>3h20m</duration>
+        <dateandtime>02/05/2018 13:20</dateandtime>
+    </tasks>
+    <tasks>
+        <description>exampleTask3</description>
+        <duration>3h20m</duration>
+        <dateandtime>02/05/2018 23:20</dateandtime>
+    </tasks>
+</addressbook>
