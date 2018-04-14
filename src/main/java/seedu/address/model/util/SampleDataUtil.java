@@ -39,7 +39,6 @@ public class SampleDataUtil {
                 getTagSet("colleagues"))
         };
     }
-
     public static ReadOnlyAddressBook getSampleAddressBook() {
         try {
             AddressBook sampleAb = new AddressBook();
