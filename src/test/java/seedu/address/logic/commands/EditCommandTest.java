@@ -22,6 +22,7 @@ import static seedu.address.logic.commands.EditCommand.MESSAGE_INVALID_PERSON_TO
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.typicaladdressbook.TypicalAddressBookCompiler.getTypicalAddressBook1;
+import static seedu.address.testutil.typicaladdressbook.TypicalAddressBookCompiler.getTypicalAddressBook2;
 
 import org.junit.Test;
 
@@ -37,6 +38,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TuteeBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
@@ -157,6 +159,22 @@ public class EditCommandTest {
     }
 
     //@@author ChoChihTun
+    @Test
+    public void execute_editTuteeFields_success() {
+        // Address book with typical tutee inside
+        model = new ModelManager(getTypicalAddressBook2(), new UserPrefs());
+
+        Person tuteeToEdit = new TuteeBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        EditCommand editCommand = prepareCommand(INDEX_FIRST_PERSON, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, tuteeToEdit);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
     @Test
     public void execute_invalidTagForPerson_failure() {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags(TUTEE_TAG).build();

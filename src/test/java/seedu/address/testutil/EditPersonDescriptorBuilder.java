@@ -15,6 +15,7 @@ import seedu.address.model.tutee.EducationLevel;
 import seedu.address.model.tutee.Grade;
 import seedu.address.model.tutee.School;
 import seedu.address.model.tutee.Subject;
+import seedu.address.model.tutee.Tutee;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -42,6 +43,24 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
     }
+
+    //@@author ChoChihTun
+    /**
+     * Returns an {@code EditPersonDescriptor} with fields containing {@code tutee}'s details
+     */
+    public EditPersonDescriptorBuilder(Tutee tutee) {
+        descriptor = new EditPersonDescriptor();
+        descriptor.setName(tutee.getName());
+        descriptor.setPhone(tutee.getPhone());
+        descriptor.setEmail(tutee.getEmail());
+        descriptor.setAddress(tutee.getAddress());
+        descriptor.setSubject(tutee.getSubject());
+        descriptor.setGrade(tutee.getGrade());
+        descriptor.setEducationLevel(tutee.getEducationLevel());
+        descriptor.setSchool(tutee.getSchool());
+        descriptor.setTags(tutee.getTags());
+    }
+    //@@author
 
     /**
      * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
