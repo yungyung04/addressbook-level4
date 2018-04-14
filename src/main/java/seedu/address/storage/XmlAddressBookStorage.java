@@ -51,8 +51,9 @@ public class XmlAddressBookStorage implements AddressBookStorage {
             logger.info("AddressBook file "  + addressBookFile + " not found");
             return Optional.empty();
         }
-        EncryptionUtil.decrypt(addressBookFile);
+        //EncryptionUtil.decrypt(addressBookFile);
         XmlSerializableAddressBook xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(new File(filePath));
+        //EncryptionUtil.encrypt(addressBookFile);
 
         try {
             return Optional.of(xmlAddressBook.toModelType());
@@ -79,6 +80,7 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         FileUtil.createIfMissing(file);
         EncryptionUtil.decrypt(file);
         XmlFileStorage.saveDataToFile(file, new XmlSerializableAddressBook(addressBook));
+        //EncryptionUtil.encrypt(file);
     }
 
     /**
