@@ -48,5 +48,4 @@ include::../UserGuide.adoc[tag=listTask]
 == Contributions to the Developer Guide
 
 include::../DeveloperGuide.adoc[tag=taskClass]
-
 include::../DeveloperGuide.adoc[tag=listCommand]
