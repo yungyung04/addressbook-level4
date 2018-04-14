@@ -21,8 +21,8 @@ import seedu.address.model.util.SampleDataUtil;
 public class TuteeBuilder extends PersonBuilder {
     public static final String DEFAULT_SUBJECT = "mathematics";
     public static final String DEFAULT_GRADE = "C+";
-    public static final String DEFAULT_EDUCATION_LEVEL = "primary";
-    public static final String DEFAULT_SCHOOL = "fengshan primary school";
+    public static final String DEFAULT_EDUCATION_LEVEL = "secondary";
+    public static final String DEFAULT_SCHOOL = "fengshan secondary school";
 
     private Subject subject;
     private Grade grade;

@@ -38,8 +38,8 @@ public class TypicalTutees {
     // Manually added
     public static final Tutee ALICETUTEE = new TuteeBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@gmail.com")
-            .withPhone("85355255").withSubject("mathematics").withGrade("C+").withEducationLevel("primary")
-            .withSchool("fengshan primary school").withTags("friends").build();
+            .withPhone("85355255").withSubject("mathematics").withGrade("C+").withEducationLevel("secondary")
+            .withSchool("fengshan secondary school").withTags("friends").build();
 
     public static final Tutee CARLTUTEE = new TuteeBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withSubject("history").withGrade("B")
