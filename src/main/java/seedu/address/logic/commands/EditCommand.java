@@ -57,8 +57,9 @@ public class EditCommand extends UndoableCommand {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    private static final String MESSAGE_INVALID_FIELD_TO_EDIT = "This person is not a tutee.";
+    public static final String MESSAGE_INVALID_PERSON_TO_EDIT = "This person is not a tutee.";
 
+    private static final String TUTEE_TAG_NAME = "Tutee";
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -99,11 +100,39 @@ public class EditCommand extends UndoableCommand {
         }
 
         personToEdit = lastShownList.get(index.getZeroBased());
-        editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-        if (!(personToEdit instanceof Tutee) && !editPersonDescriptor.isTuteeFieldNull()) {
-            throw new CommandException(MESSAGE_INVALID_FIELD_TO_EDIT);
+        if (!(personToEdit instanceof Tutee) && !isEditPersonFieldValid()) {
+            throw new CommandException(MESSAGE_INVALID_PERSON_TO_EDIT);
         }
+        editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
     }
+
+    //@@author ChoChihTun
+    /**
+     * Checks if fields to be edited is valid for a person object
+     *
+     * @return true if fields to edit are valid for a person object
+     *         false if fields to edit are invalid for a person object
+     */
+    private boolean isEditPersonFieldValid() {
+        Tag tuteeTag = new Tag(TUTEE_TAG_NAME);
+        return !editPersonDescriptor.isAnyTuteeFieldEdited()
+                && isEditedPersonTagValid(tuteeTag);
+    }
+
+    /**
+     * Checks if edited tag for person object is valid
+     *
+     * @param tuteeTag tutee tag is invalid for a person object
+     * @return true if edited tag is valid or tag is not being edited
+     *         false if new tag is a tutee tag which is invalid for person
+     */
+    private boolean isEditedPersonTagValid(Tag tuteeTag) {
+        if (editPersonDescriptor.isTagEdited()) {
+            return !editPersonDescriptor.tags.contains(tuteeTag);
+        }
+        return true;
+    }
+    //@@author
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
@@ -118,15 +147,18 @@ public class EditCommand extends UndoableCommand {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
+        //@@author ChoChihTun
         if (personToEdit instanceof Tutee) {
             Subject updatedSubject = editPersonDescriptor.getSubject().orElse(((Tutee) personToEdit).getSubject());
             Grade updatedGrade = editPersonDescriptor.getGrade().orElse(((Tutee) personToEdit).getGrade());
             EducationLevel updatedEducationalLevel = editPersonDescriptor.getEducationalLevel()
                     .orElse(((Tutee) personToEdit).getEducationLevel());
             School updatedSchool = editPersonDescriptor.getSchool().orElse(((Tutee) personToEdit).getSchool());
+
             return new Tutee(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSubject, updatedGrade,
                     updatedEducationalLevel, updatedSchool, updatedTags);
         }
+        //@@author
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
@@ -275,16 +307,26 @@ public class EditCommand extends UndoableCommand {
 
         //@@author ChoChihTun
         /**
-         * Checks if the tutee fields are null
+         * Checks if tag is being edited
          *
-         * @return true if ALL the fields are null
-         *         false if at least 1 field is not null
+         * @return true if tag is being edited
+         *         false if tag is not being edited
          */
-        public boolean isTuteeFieldNull() {
-            return subject == null
-                    && grade == null
-                    && educationLevel == null
-                    && school == null;
+        public boolean isTagEdited() {
+            return tags != null;
+        }
+
+        /**
+         * Checks if any tutee field is being edited
+         *
+         * @return true if no field is being edited
+         *         false if at least 1 field is being edited
+         */
+        public boolean isAnyTuteeFieldEdited() {
+            return subject != null
+                    || grade != null
+                    || educationLevel != null
+                    || school != null;
         }
         //@@author
 
