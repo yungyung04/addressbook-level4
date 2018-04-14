@@ -36,6 +36,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tutee.Tutee;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TuteeBuilder;
@@ -164,8 +165,8 @@ public class EditCommandTest {
         // Address book with typical tutee inside
         model = new ModelManager(getTypicalAddressBook2(), new UserPrefs());
 
-        Person tuteeToEdit = new TuteeBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        Tutee tuteeToEdit = new TuteeBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(tuteeToEdit).build();
         EditCommand editCommand = prepareCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, tuteeToEdit);
