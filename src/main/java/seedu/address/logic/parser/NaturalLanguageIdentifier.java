@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,6 +52,7 @@ public class NaturalLanguageIdentifier {
      * Converts any keywords that are recognizable as month-related natural languages into their month representation.
      */
     public String[] convertNaturalLanguagesIntoMonths(String[] keywords) {
+        requireNonNull(keywords);
         String[] mergedKeywords = mergeTwoWordedNaturalLanguage(keywords);
         for (int i = 0; i < mergedKeywords.length; i++) {
             mergedKeywords[i] = getMonthAsString(mergedKeywords[i]);
@@ -60,6 +64,7 @@ public class NaturalLanguageIdentifier {
      * Converts natural language into its month representation if possible.
      */
     public String getMonthAsString(String userInput) {
+        requireNonNull(userInput);
         String result;
         switch (userInput) {
         case NATURAL_TODAY:
@@ -84,26 +89,22 @@ public class NaturalLanguageIdentifier {
     }
 
     /**
-     * Merges 2 adjoin strings if they can form a valid natural language.
+     * Merges 2 adjoin Strings if the merged form is a valid natural language.
      * Keywords are case-sensitive.
      */
     public static String[] mergeTwoWordedNaturalLanguage(String[] keywords) {
+        requireNonNull(keywords);
         if (keywords.length <= 1) {
             return keywords;
         }
 
         ArrayList<String> mergedKeywords = new ArrayList<>();
-        for (int i = 0; i < keywords.length - 1; i++) {
-            if (isMergeable(keywords[i], keywords[i + 1])) {
+        for (int i = 0; i < keywords.length; i++) {
+            if (i < (keywords.length - 1) && isMergeable(keywords[i], keywords[i + 1])) {
                 mergedKeywords.add(keywords[i] + " " + keywords[i + 1]);
                 i++;
             } else {
-                if (i < keywords.length - 2) {
-                    mergedKeywords.add(keywords[i]);
-                } else {
-                    mergedKeywords.add(keywords[i]);
-                    mergedKeywords.add(keywords[i + 1]);
-                }
+                mergedKeywords.add(keywords[i]);
             }
         }
         return mergedKeywords.toArray(new String[mergedKeywords.size()]);
