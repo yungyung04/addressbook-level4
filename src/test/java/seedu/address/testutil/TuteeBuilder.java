@@ -19,8 +19,8 @@ import seedu.address.model.util.SampleDataUtil;
  * A utility class to help with building Tutee objects.
  */
 public class TuteeBuilder extends PersonBuilder {
-    public static final String DEFAULT_SUBJECT = "social studies";
-    public static final String DEFAULT_GRADE = "B-";
+    public static final String DEFAULT_SUBJECT = "mathematics";
+    public static final String DEFAULT_GRADE = "C+";
     public static final String DEFAULT_EDUCATION_LEVEL = "primary";
     public static final String DEFAULT_SCHOOL = "fengshan primary school";
 

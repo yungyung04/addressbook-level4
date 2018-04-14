@@ -64,9 +64,9 @@ public class CommandTestUtil {
     public static final String VALID_SUBJECT_BOB = "mathematics";
     public static final String VALID_GRADE_AMY = "B+";
     public static final String VALID_GRADE_BOB = "A1";
-    public static final String VALID_EDUCATION_LEVEL_AMY = "secondary";
+    public static final String VALID_EDUCATION_LEVEL_AMY = "primary";
     public static final String VALID_EDUCATION_LEVEL_BOB = "junior college";
-    public static final String VALID_EDUCATION_LEVEL_ROBERT = "primary";
+    public static final String VALID_EDUCATION_LEVEL_ROBERT = "secondary";
     public static final String VALID_SCHOOL_AMY = "nan hua high school";
     public static final String VALID_SCHOOL_BOB = "victoria junior college";
 
