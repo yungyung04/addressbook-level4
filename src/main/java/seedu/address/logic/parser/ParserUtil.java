@@ -192,6 +192,7 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
+            // a person should not have tutee tag
             if (isTuteeTag(tagName)) {
                 throw new IllegalValueException(String.format(MESSAGE_INVALID_TAG, tagName));
             }
@@ -207,7 +208,7 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            // Tutee tag is provided automatically by the Tutee constructor
+            // Tutee tag is added automatically by the Tutee constructor
             if (!isTuteeTag(tagName)) {
                 tagSet.add(parseTag(tagName));
             }
