@@ -113,6 +113,10 @@ public class TuitionTask implements Task {
         return taskDateTime.format(formatter);
     }
 
+    public String getTuitionTitle() {
+        return String.format(TUITION_TITLE, tutee);
+    }
+
     //@@author yungyung04
     @Override
     public String toString() {
@@ -170,7 +174,4 @@ public class TuitionTask implements Task {
                 && description.equals(((TuitionTask) other).description));
     }
     */
-    public String getTuitionTitle() {
-        return String.format(TUITION_TITLE, tutee);
-    }
 }

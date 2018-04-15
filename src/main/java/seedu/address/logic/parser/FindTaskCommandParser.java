@@ -44,7 +44,7 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
             .appendPattern("MM").toFormatter(Locale.ENGLISH);
     private static final DateTimeFormatter FORMATTER_MONTH_MMM = new DateTimeFormatterBuilder().parseCaseInsensitive()
             .appendPattern("MMM").toFormatter(Locale.ENGLISH);
-    private static final DateTimeFormatter FORMATER_MONTH_MMMM = new DateTimeFormatterBuilder().parseCaseInsensitive()
+    private static final DateTimeFormatter FORMATTER_MONTH_MMMM = new DateTimeFormatterBuilder().parseCaseInsensitive()
             .appendPattern("MMMM").toFormatter(Locale.ENGLISH);
 
     private List<String> validCategories = new ArrayList<>(Arrays.asList(CATEGORY_MONTH));
@@ -186,7 +186,7 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
             accessor = FORMATTER_MONTH_MMM.parse(monthString);
             month = accessor.get(ChronoField.MONTH_OF_YEAR);
         } else if (monthString.length() > MONTH_WITH_MMM_FORMAT_CHARACTER_LENGTH) {
-            accessor = FORMATER_MONTH_MMMM.parse(monthString);
+            accessor = FORMATTER_MONTH_MMMM.parse(monthString);
             month = accessor.get(ChronoField.MONTH_OF_YEAR);
         }
         return month;
