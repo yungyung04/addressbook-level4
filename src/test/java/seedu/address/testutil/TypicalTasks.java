@@ -12,6 +12,7 @@ import seedu.address.model.person.exceptions.TimingClashException;
 /**
  * A utility class for Task. For now, this is customized to the personal task class
  */
+//@@author a-shakra
 public class TypicalTasks {
 
     public static final Task EXAMPLE1 = new TaskBuilder().withTuteeName(null).withDescription("exampleTask1")

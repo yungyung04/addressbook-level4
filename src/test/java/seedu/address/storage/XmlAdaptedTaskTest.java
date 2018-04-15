@@ -7,11 +7,8 @@ import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.testutil.Assert;
-
+//@@author a-shakra
 public class XmlAdaptedTaskTest {
-    private static final String INVALID_DURATION = "3";
-    private static final String INVALID_DATEANDTIME = "02/03/2018T03:20";
-
     private static final String VALID_DESCRIPTION = "A description";
 
     private static final String VALID_DURATION = EXAMPLE1.getDuration();

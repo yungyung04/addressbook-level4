@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- Task with an invalid duration field -->
+<!-- @@author a-shakra -->
 <tasks>
     <description>exampleTask1</description>
     <duration>3h20m</duration>

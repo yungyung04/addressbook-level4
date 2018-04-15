@@ -2,9 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.TypicalTasks.EXAMPLE1;
 import static seedu.address.testutil.TypicalTasks.EXAMPLE2;
-import static seedu.address.testutil.TypicalTasks.EXAMPLE3;
 import static seedu.address.testutil.TypicalTasks.EXAMPLE4;
 import static seedu.address.testutil.typicaladdressbook.TypicalAddressBookCompiler.getTypicalAddressBook1;
 import static seedu.address.testutil.typicaladdressbook.TypicalPersons.ALICE;
@@ -103,7 +101,7 @@ public class XmlAddressBookStorageTest {
         assertEquals(original, new AddressBook(readBack));
 
     }
-
+    //@@author a-shakra
     @Test
     public void readAndSaveAddressBook_allInOrder_taskSuccess() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempAddressBook.xml";
