@@ -368,7 +368,6 @@ public class SameTimeUnitException extends Exception {
     public SameTimeUnitException(String message) {
         super(message);
     }
-
 }
 ```
 ###### \java\seedu\address\logic\parser\ParserUtil.java

@@ -321,14 +321,15 @@ for more information about Tutee.
 ** Time refers to the starting time of the tuition.
 ** Time must be written in the format of hh:mm (24-hr format).
 *** valid example   : 12:00
-*** inavlid example : 25:00
+*** invalid example : 25:00
 
 * DURATION
 ** Duration refers to the duration of the tuition.
 ** Duration must be written in the format of XXhXXm
 *** valid example : 1h30m
 **** this means that the tuition lasts for 1 *hour* and 30 *minute*.
-*** valid example : 01h30m
+*** invalid example : 1h30m
+**** the duration in hour cannot have leading zero
 *** invalid example : 1h60m
 **** the duration in minute must be a number between 0 and 59.
 *** invalid example : 30m

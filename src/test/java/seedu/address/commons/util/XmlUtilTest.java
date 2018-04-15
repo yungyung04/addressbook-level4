@@ -96,6 +96,7 @@ public class XmlUtilTest {
         assertEquals(expectedPerson, actualPerson);
     }
 
+    //@@author a-shakra
     @Test
     public void xmlAdaptedTaskFromFile_fileWithMissingTaskField_validResult() throws Exception {
         XmlAdaptedTask actualTask = XmlUtil.getDataFromFile(
@@ -104,6 +105,7 @@ public class XmlUtilTest {
                 "exampleTask1", "3:20", null);
         assertEquals(expectedTask, actualTask);
     }
+    //@@author
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
@@ -184,6 +186,8 @@ public class XmlUtilTest {
     @XmlRootElement(name = "person")
     private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}
 
+    //@@author a-shakra
     @XmlRootElement(name = "tasks")
     private static class XmlAdaptedTaskWithRootElement extends XmlAdaptedTask {}
+    //@@author
 }
