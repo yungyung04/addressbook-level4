@@ -38,7 +38,6 @@ public class TaskUtil {
      * Converts a date and time string to a local date time object
      */
     public static LocalDateTime toLocalDateAndTime(String sDateAndTime) {
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
         LocalDateTime lDateAndTime = LocalDateTime.parse(sDateAndTime, FORMATTER);
         return lDateAndTime;
     }
