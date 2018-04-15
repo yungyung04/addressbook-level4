@@ -363,11 +363,19 @@ public class ParserUtil {
      */
     public static String parseDuration(String duration) throws DurationParseException {
         requireNonNull(duration);
-        String durationValidationRegex = "([0-9]|1[0-9]|2[0-3])h([0-5][0-9]|[0-9])m";
-        if (!duration.matches(durationValidationRegex)) {
+        if (!isValidDuration(duration)) {
             throw new DurationParseException(MESSAGE_INVALID_DURATION);
         }
         return duration;
+    }
+
+    /**
+     * Returns true if the given duration is valid.
+     */
+    private static boolean isValidDuration(String duration) {
+        String durationValidationRegex = "([0-9]|1[0-9]|2[0-3])h([0-5][0-9]|[0-9])m";
+        return duration.matches(durationValidationRegex) && duration.equals("0h0m")
+                && duration.equals("0h00m");
     }
 
     /**
