@@ -24,7 +24,7 @@ public class PersonSortUtil {
     private static final Logger logger = LogsCenter.getLogger(PersonSortUtil.class);
 
     /**
-     * Returns the apppropriate Person comparator given the sorting category.
+     * Returns the appropriate Person comparator given the sorting category.
      */
     public static Comparator<Person> getComparator(String sortCategory) {
         requireNonNull(sortCategory);

@@ -18,9 +18,9 @@ public class PersonalTask implements Task {
     private static final String HOUR_DELIMITER = "h";
     private static final String MINUTE_DELIMITER = "m";
     private static final String NULL_STRING = "";
+
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm")
             .withResolverStyle(ResolverStyle.STRICT);
-
     private String description;
     private String duration;
     private LocalDateTime taskDateTime;

@@ -9,8 +9,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
+import seedu.address.model.task.exceptions.TimingClashException;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -25,7 +25,6 @@ public class UniqueTaskList implements Iterable<Task> {
     private static final String MINUTE_DELIMITER = "m";
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
-
     /**
      * Constructs empty TaskList.
      */
@@ -37,7 +36,6 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @throws TimingClashException if there is a clash in timing with an existing task
      */
-
     public void add(Task toAdd) throws TimingClashException {
         requireNonNull(toAdd);
         if (isTimeClash(toAdd.getTaskDateTime(), toAdd.getDuration())) {
@@ -45,6 +43,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         internalList.add(toAdd);
     }
+
     //@@author a-shakra
     /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.

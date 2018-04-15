@@ -17,9 +17,8 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.person.exceptions.TimingClashException;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
+import seedu.address.model.task.exceptions.TimingClashException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -116,11 +115,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
     //@@author
-    @Override
-    public void deleteTag(Tag tag, Person person) {
-        assert(tag != null && person != null);
-        addressBook.removeTagFromPerson(tag, person);
-    }
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
