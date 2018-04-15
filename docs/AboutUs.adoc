@@ -38,7 +38,7 @@ Responsibilities: Model + Testing
 
 === Anas Shakra
 image::a-shakra.jpg[width="150", align="left"]
-{empty}[http://github.com/a-shakra[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/a-shakra[github]] [<<ashakra#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Logic + Integration

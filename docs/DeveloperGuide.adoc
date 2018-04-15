@@ -966,6 +966,16 @@ public interface Task {
     Entry getEntry();
 }
 ----
+
+Below is a representation of the Task object. The form below is as an XmlAdaptedTask object
+which allows the information contained in a Task object to be represented in a certain
+format. Note that while the Task object has a Tuition Task and a Personal Task variant,
+the XmlAdaptedTask object represented below embodies both aspects. Moreover, the
+XmlAdaptedTask consists of String objects only, as opposed to the methods and variables
+of various types that populate the Task interface above.
+
+image::taskStorage.jpg[width=""]
+
 // end::taskClass[]
 
 // tag::listCommand[]
