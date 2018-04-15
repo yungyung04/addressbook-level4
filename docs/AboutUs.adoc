@@ -29,7 +29,7 @@ Responsibilities: UI + Code Quality
 
 === Raymond Zheng
 image::raymond511.jpg[width="150", align="left"]
-{empty}[http://github.com/raymond511[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/raymond511[github]] [<<raymond#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Model + Testing
