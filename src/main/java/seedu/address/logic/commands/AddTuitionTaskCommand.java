@@ -11,7 +11,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicateTaskException;
 import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.tutee.TuitionTask;
 import seedu.address.model.tutee.Tutee;
@@ -69,8 +68,6 @@ public class AddTuitionTaskCommand extends UndoableCommand {
             model.addTask(toAdd);
         } catch (TimingClashException tce) {
             throw new CommandException(tce.getMessage());
-        } catch (DuplicateTaskException dte) {
-            throw new CommandException(dte.getMessage());
         }
         return new CommandResult(MESSAGE_SUCCESS);
     }

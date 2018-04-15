@@ -14,7 +14,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.DuplicateTaskException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.tag.Tag;
@@ -66,7 +65,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //@@author a-shakra
-    public void setTasks(List<Task> tasks) throws DuplicateTaskException, TimingClashException {
+    public void setTasks(List<Task> tasks) throws TimingClashException {
         this.tasks.setTasks(tasks);
     }
     //@@author
@@ -83,8 +82,6 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .collect(Collectors.toList());
         try {
             setTasks(taskList);
-        } catch (DuplicateTaskException e) {
-            throw new AssertionError("AddressBooks should not have duplicate tasks");
         } catch (TimingClashException e) {
             throw new AssertionError("Timing Clash");
         }
@@ -95,8 +92,6 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new AssertionError("AddressBooks should not have duplicate persons");
         } catch (TimingClashException e) {
             throw new AssertionError("AddressBooks should not have clashed tasks");
-        } catch (DuplicateTaskException e) {
-            throw new AssertionError("AddressBooks should not have duplicate tasks");
         }
     }
 
@@ -145,7 +140,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
 
 
-    public void addTask(Task t) throws DuplicateTaskException, TimingClashException {
+    public void addTask(Task t) throws TimingClashException {
         tasks.add(t);
     }
 
@@ -153,8 +148,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Updates a task to the address book.
      *
      */
-    public void updateTask(Task target, Task editedTask)
-            throws DuplicateTaskException, TaskNotFoundException {
+    public void updateTask(Task target, Task editedTask) throws TaskNotFoundException {
         requireNonNull(editedTask);
         tasks.setTask(target, editedTask);
     }
