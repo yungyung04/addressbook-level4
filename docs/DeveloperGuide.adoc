@@ -1263,6 +1263,9 @@ These are details that are owned only by tutees, which include tutee's education
 [[task-list]] Task List / Schedule::
 These terms are used interchangeably to refer to the list of tasks located in the middle of the app.
 
+[[natural-language]] Natural Language::
+This refers to some predetermined syllables that are commonly used by users.
+
 [appendix]
 == Product Survey
 
