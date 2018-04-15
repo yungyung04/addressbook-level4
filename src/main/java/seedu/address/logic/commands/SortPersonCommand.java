@@ -41,7 +41,7 @@ public class SortPersonCommand extends Command {
 
     public SortPersonCommand(String category) {
         this.category = category;
-        comparator = new PersonSortUtil().getComparator(category);
+        comparator = PersonSortUtil.getComparator(category);
     }
 
     @Override
