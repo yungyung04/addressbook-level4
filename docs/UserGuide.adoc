@@ -113,14 +113,16 @@ Using Command Word: +
 Format: `addtutee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT g/GRADE edu/EDUCATION_LEVEL sch/SCHOOL [t/TAG]...`
 
 [TIP]
-A tutee can have any number of tags (including 0)
+====
+* A tutee can have any number of tags (including 0)
+* Special character in grade can be anything since different institution may use different grading system. +
+i.e. B+, B3, B$, B# etc are all valid
+====
 
-[NOTE]
+[WARNING]
 ====
 * Education level can only be either primary, secondary or junior college (NOT case sensitive) +
 * All details except tag MUST be added
-* Special character in grade can be anything since different institution may use different grading system. +
-i.e. B+, B3, B$, B# etc are all valid
 ====
 
 Examples:
@@ -180,8 +182,6 @@ Format: `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [s/SUBJECT
 * "Tutee" tag is specific to tutee only and will never be removed.
 * Remove all the person's tags: type `t/` without specifying any tags after it.
 * Remove all the tutee's tags except "Tutee" tag: type `t/` without specifying any tags after it OR type `t/tutee` (this includes other variation of case letters for tutee such as "TUTEE", "TuteE" etc).
-* Manual adding of "Tutee" tag to a person is not allowed (this includes other variation of case letters for tutee such as "tutee", "TuTeE" etc)
-* Editing of subject, grade, education level and school is not allowed for person
 ====
 
 [underline]#*Valid Details to edit for each type of contact:*#
@@ -203,6 +203,8 @@ Format: `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [s/SUBJECT
 * At least one of the valid optional fields must be provided.
 * Existing information will be updated to the new information.
 * When editing tags, the existing tags of the contact will be removed (Except "Tutee" tag) i.e adding of tags is not cumulative.
+* Manual adding of "Tutee" tag to a person is not allowed (this includes other variation of case letters for tutee such as "tutee", "TuTeE" etc)
+* Editing of subject, grade, education level and school is not allowed for person
 ====
 
 Examples:
