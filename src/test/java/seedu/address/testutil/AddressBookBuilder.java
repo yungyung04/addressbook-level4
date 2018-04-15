@@ -5,8 +5,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Task;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.exceptions.TimingClashException;
 
 /**
  * A utility class to help with building Addressbook objects.
