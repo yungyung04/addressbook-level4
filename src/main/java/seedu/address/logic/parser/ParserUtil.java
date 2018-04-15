@@ -376,8 +376,8 @@ public class ParserUtil {
      */
     private static boolean isValidDuration(String duration) {
         String durationValidationRegex = "([0-9]|1[0-9]|2[0-3])h([0-5][0-9]|[0-9])m";
-        return duration.matches(durationValidationRegex) && duration.equals(ZERO_DURATION_FIRST_FORMAT)
-                && duration.equals(ZERO_DURATION_SECOND_FORMAT);
+        return duration.matches(durationValidationRegex) && !duration.equals(ZERO_DURATION_FIRST_FORMAT)
+                && !duration.equals(ZERO_DURATION_SECOND_FORMAT);
     }
 
     /**
