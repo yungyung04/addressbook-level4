@@ -45,7 +45,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddTuteeCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.FindPersonCommand;
