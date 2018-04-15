@@ -196,6 +196,7 @@ Format: `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [s/SUBJECT
 | --- |GRADE
 | --- |EDUCATION_LEVEL
 | --- |SCHOOL
+|TAG |TAG
 |=======================================================================
 
 [WARNING]

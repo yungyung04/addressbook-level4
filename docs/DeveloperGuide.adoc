@@ -140,7 +140,7 @@ The _Sequence Diagram_ below shows how the components interact for the scenario 
 image::SDforDeletePerson.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `AddressBookChangedEvent` when the <<address-book,Address Book>> data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
@@ -235,9 +235,9 @@ This section describes some noteworthy details on how certain features are imple
 ==== Current Implementation
 
 ===== Reason for Implementation
-As the user of this application is the tutor, he or she will need to add the tutees' contact details.
-Since a tutee contains more details specific to them compared to a non-tutee, tutee contacts should not be mixed with the non-tutee contacts so that all the contacts are organized and can be managed easily.
-Therefore, AddTuteeCommand is used to add only the tutees' contact details.
+As the user of this application is a private tutor, he or she will need to add the <<tutee,tutees'>> contact details.
+Since a tutee contains more details specific to them compared to a person, tutee contacts should not be mixed with the <<person, person>> contacts so that all the contacts are organized and can be managed easily.
+Therefore, AddTuteeCommand is used to add only the <<tutee-details,tutees' details>>.
 
 ===== How it is implemented
 The AddTuteeCommand is an extension of the Undoable Command, which is part of the Logic Component.
@@ -268,32 +268,36 @@ public class AddTuteeCommand extends UndoableCommand {
 }
 ----
 
-The following sequence diagram shows how the addtutee operation works:
+The following [underline]#*sequence diagram*# shows how the addtutee operation works:
 
 image::AddTuteeCommandSequenceDiagram.png[width="800"]
 
 As shown in the sequence diagram, after Tutee object has been created, it is being passed to Model. Model manager will add the Tutee object to the person list in TuitionConnect.
-By having a combined list of tutee and non-tutee, we can manage the contacts using one command, such as delete command, instead of having 1 command for tutee and 1 command for non-tutee.
+By having a combined list of tutee and person, we can manage the contacts using one command, such as delete command, instead of having 1 command for tutee and 1 command for person.
 The combined list is achieved through the use of inheritance, whereby Tutee class inherits the Person class as shown in the diagram below.
 
-image:TuteeClassDiagram.jpg[width="800"]
+image:TuteeClassDiagram.jpg[width="600" height="400"]
 
 Since a tutee is a person, we can carried out inheritance by extending the Person class.
 Both Tutee and Person class objects have the same fields such as Name, Phone, Email and Address.
-However, Tutee class object has additional fields such as Subject, Grade, EducationLevel and School, which are irrelevant to a Person class object (non-tutee).
+However, Tutee class object has additional details such as Subject, Grade, EducationLevel and School, which are irrelevant to a Person class object.
 
 [NOTE]
-If the person already exists, either as tutee or non-tutee, in the contact list, DuplicatePersonException will be thrown.
+If the person already exists, either as tutee or person, in the contact list, DuplicatePersonException will be thrown.
+
+The following [underline]#*activity diagram*# shows the workflow when adding a tutee.
+
+image:AddTuteeActivityDiagram.png[width="800]
 
 ==== Design Consideration
 
 * **Alternative 1 (current choice):** Create a new command "addtutee" and a tutee class, which extends person class
-** Pros: Non-tutee will not have any detail that is specific to tutee only. This saves memory especially when there are numerous non-tutee objects.
-** Cons: A tutee cannot simply convert into a non-tutee when tutor stops teaching him/her. Tutor has to delete the tutee and add him/her again as a non-tutee.
+** Pros: Person will not have any detail that is specific to tutee only. This saves memory especially when there are numerous person objects.
+** Cons: A tutee cannot simply convert into a person object when tutor stops teaching him/her. Tutor has to delete the tutee and add him/her again as a person.
 
 * **Alternative 2:** Modify the current AddCommand and add more fields to the person class
 ** Pros: Features can be implemented easily without modifying much to the existing code.
-** Cons: Non-tutee object creates unrelated field objects such as "subject" and "school" and these objects will waste the memory space. This problem will be significant when there are a lot of non-tutee objects.
+** Cons: Person object creates unrelated field objects such as "subject" and "school" and these objects will waste the memory space. This problem will be significant when there are a lot of person objects.
 // end::addtutee[]
 
 // tag::undoredo[]
@@ -1134,7 +1138,7 @@ Use case ends.
 
 * *a. At any time, user can cancel the request.
 [none]
-** *a1 TC requests confirmation of the cancelation.
+** *a1 TC requests confirmation of the cancellation.
 ** *a2. User confirms the cancellation.
 ** Use case ends.
 
@@ -1202,8 +1206,29 @@ An application for storing the contact details.
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
+[[person]] Person::
+A non tutee contact
+
+[[personal-task]] Personal Task::
+Non-tuition activity
+
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
+
+[[task]] Task::
+This refers to the activities you want to add into your 'to-do-list'
+
+[[tuition-task]] Tuition Task::
+Teaching a specified tutee in contact list.
+
+[[tutee]] Tutee::
+A student whom you are giving tuition to
+
+[[tutee-details]] Tutee Details::
+These are details that are owned only by tutees, which include tutee's education level, grade, subject and school
+
+[[task-list]] Task List / Schedule::
+These terms are used interchangeably to refer to the list of tasks located in the middle of the app.
 
 [appendix]
 == Product Survey
