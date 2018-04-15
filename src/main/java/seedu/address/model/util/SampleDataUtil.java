@@ -15,10 +15,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.DuplicateTaskException;
-import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.personal.PersonalTask;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.exceptions.TimingClashException;
 import seedu.address.model.tutee.TuitionTask;
 
 /**
@@ -92,10 +91,8 @@ public class SampleDataUtil {
             return sampleAb;
         } catch (DuplicatePersonException e) {
             throw new AssertionError("sample data cannot contain duplicate persons", e);
-        } catch (DuplicateTaskException dte) {
-            throw new AssertionError("sample data cannot contain duplicate tasks", dte);
         } catch (TimingClashException tce) {
-            throw new AssertionError("Timing clash detected", tce);
+            throw new AssertionError("sample data cannot contain duplicate Tasks, tce");
         }
     }
 
