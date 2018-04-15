@@ -47,7 +47,7 @@ public class PersonSortUtil {
             comparator = getSubjectComparator();
             break;
         default:
-            logger.severe("an invalid category is identified in PersonSOrtUtil class.");
+            logger.severe("an invalid category is identified in PersonSortUtil class.");
             assert (false); //invalid sortCategory should be identified in parser.
         }
         return comparator;
