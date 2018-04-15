@@ -28,6 +28,14 @@ public class SampleDataUtil {
     public static final String DATETIME1 = "03/04/2018 02:30";
     public static final String DATETIME2 = "05/04/2018 02:30";
     public static final String DATETIME3 = "07/04/2018 02:30";
+    public static final String DATETIME4 = "03/04/2019 02:30";
+    public static final String DATETIME5 = "05/04/2020 02:30";
+    public static final String DATETIME6 = "15/04/2018 02:30";
+    public static final String DATETIME7 = "20/04/2018 02:30";
+    public static final String DATETIME8 = "22/04/2018 02:30";
+    public static final String DATETIME9 = "23/04/2018 02:30";
+    public static final String DATETIME10 = "13/04/2018 02:30";
+    public static final String DATETIME11 = "29/04/2018 02:30";
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm")
             .withResolverStyle(ResolverStyle.STRICT);
 
@@ -54,13 +62,21 @@ public class SampleDataUtil {
         };
     }
     public static Task[] getSampleTasks() {
-        LocalDateTime time1 = LocalDateTime.parse(DATETIME1, formatter);
-        LocalDateTime time2 = LocalDateTime.parse(DATETIME2, formatter);
-        LocalDateTime time3 = LocalDateTime.parse(DATETIME3, formatter);
         return new Task[]{
-            new PersonalTask(time1, "2h30m", "exampleTask1"),
-            new TuitionTask("Alice", time2, "2h30m", "exampleTask2"),
-            new PersonalTask(time3, "2h30m", "exampleTask3")
+            new PersonalTask(LocalDateTime.parse(DATETIME1, formatter), "2h30m", "exampleTask1"),
+            new TuitionTask("Alice", LocalDateTime.parse(DATETIME2, formatter), "2h30m", "exampleTask2"),
+            new PersonalTask(LocalDateTime.parse(DATETIME3, formatter), "2h30m", "exampleTask3"),
+            new PersonalTask(LocalDateTime.parse(DATETIME4, formatter), "2h30m", "exampleTask4"),
+            new PersonalTask(LocalDateTime.parse(DATETIME5, formatter), "2h30m", "exampleTask5"),
+            new PersonalTask(LocalDateTime.parse(DATETIME6, formatter), "2h30m", "exampleTask6"),
+            new PersonalTask(LocalDateTime.parse(DATETIME7, formatter), "2h30m", "exampleTask7"),
+            new PersonalTask(LocalDateTime.parse(DATETIME8, formatter), "2h30m", "exampleTask8"),
+            new TuitionTask("John", LocalDateTime.parse(DATETIME9, formatter), "2h30m",
+                    "exampleTask9"),
+            new TuitionTask("Eka", LocalDateTime.parse(DATETIME10, formatter), "2h30m",
+                    "exampleTask10"),
+            new TuitionTask("Chochitun", LocalDateTime.parse(DATETIME11, formatter), "2h30m",
+                    "exampleTask11"),
         };
     }
 
