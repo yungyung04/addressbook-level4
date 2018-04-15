@@ -40,8 +40,10 @@ import seedu.address.model.tutee.Subject;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_TAG = "%1$s tag is only for tutee.";
 
     private static final String EMPTY_STRING = "";
+    private static final String TUTEE_TAG_NAME = "Tutee";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -168,18 +170,63 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws IllegalValueException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
+            if (isTuteeTag(tagName)) {
+                tagName = TUTEE_TAG_NAME;
+            }
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
     }
 
     //@@author ChoChihTun
+    /**
+     * Parses a person's {@code Collection<String> tags} into a {@code Set<Tag>}.
+     */
+    public static Set<Tag> parsePersonTags(Collection<String> tags) throws IllegalValueException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            // a person should not have tutee tag
+            if (isTuteeTag(tagName)) {
+                throw new IllegalValueException(String.format(MESSAGE_INVALID_TAG, tagName));
+            }
+            tagSet.add(parseTag(tagName));
+        }
+        return tagSet;
+    }
+
+    /**
+     * Parses a tutee's {@code Collection<String> tags} into a {@code Set<Tag>}.
+     */
+    public static Set<Tag> parseTuteeTags(Collection<String> tags) throws IllegalValueException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            // Tutee tag is added automatically by the Tutee constructor
+            if (!isTuteeTag(tagName)) {
+                tagSet.add(parseTag(tagName));
+            }
+        }
+        return tagSet;
+    }
+
+    /**
+     * Checks if {@code String tagName} is tutee tag name
+     *
+     * @param tagName to be checked
+     * @return true if tagName is tutee tag name
+     *         false if tagName is not tutee tag name
+     */
+    private static boolean isTuteeTag(String tagName) {
+        return tagName.toLowerCase().equals(TUTEE_TAG_NAME.toLowerCase());
+    }
+
     /**
      * Parses a {@code String subject} into an {@code Subject}.
      * Leading and trailing whitespaces will be trimmed.
