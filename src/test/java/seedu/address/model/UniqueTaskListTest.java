@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.person.exceptions.TimingClashException;
+import seedu.address.model.task.exceptions.TimingClashException;
 import seedu.address.model.personal.PersonalTask;
 import seedu.address.model.tutee.TuitionTask;
 import seedu.address.testutil.Assert;

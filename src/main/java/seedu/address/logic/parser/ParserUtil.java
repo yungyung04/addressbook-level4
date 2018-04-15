@@ -21,7 +21,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.exceptions.DurationParseException;
+import seedu.address.logic.parser.exceptions.DurationParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutee.EducationLevel;
 import seedu.address.model.tutee.Grade;
