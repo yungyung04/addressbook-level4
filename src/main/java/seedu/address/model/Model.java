@@ -54,7 +54,8 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    void addTask(Task target) throws TimingClashException;
+
+    void addTask (Task target) throws TimingClashException;
 
     void deleteTask(Task target) throws TaskNotFoundException;
 

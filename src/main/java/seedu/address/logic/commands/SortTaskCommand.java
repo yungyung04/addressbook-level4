@@ -32,7 +32,7 @@ public class SortTaskCommand extends Command {
     public SortTaskCommand(String category) {
         requireNonNull(category);
         this.category = category;
-        comparator = new TaskSortUtil().getComparator(category);
+        comparator = TaskSortUtil.getComparator(category);
     }
 
     @Override

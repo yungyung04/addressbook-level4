@@ -45,7 +45,6 @@ public class UniqueTaskListTest {
         } catch (TimingClashException e) {
             throw new AssertionError("Should not have any clashed timing");
         }
-
         // New task starts at the same time as an existing task
         Assert.assertThrows(TimingClashException.class, () ->
                 uniqueTaskList.add(new PersonalTask(

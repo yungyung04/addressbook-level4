@@ -93,10 +93,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author a-shakra
     @Override
-
-    public synchronized void addTask(Task task) throws TimingClashException {
-        addressBook.addTask(task);
-        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    public synchronized void addTask(Task aTask) throws TimingClashException {
+        addressBook.addTask(aTask);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS); //Change to new predicate?
         indicateAddressBookChanged();
     }
 
