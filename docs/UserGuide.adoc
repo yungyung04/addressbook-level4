@@ -45,7 +45,7 @@ This app will not work with earlier versions of Java 8.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 // tag::ui_overview[]
-image::Ui_with_overview.jpg[width="400"]
+image::Ui_with_overview.jpg[width="650"]
 // end::ui_overview[]
 [NOTE]
 If "license check has failed" message pops up, simply click "OK".
@@ -213,6 +213,8 @@ Lists all tutee with grade `B` and `B+`
 Sorts your displayed contact list according to a specified category in ascending order (lexicographically). +
 Using Command Word: +
 Format: `sortpersonby CATEGORY` +
+Using Command Alias: +
+Format: `spb CATEGORY` +
 
 ****
 * There are 5 categories to pick:
@@ -437,6 +439,8 @@ Lists all tasks scheduled on February, June and October.
 Sorts your displayed task list according to a specified category in ascending order. +
 Using Command Word: +
 Format: `sorttaskby CATEGORY` +
+Using Command Alias: +
+Format: `stb CATEGORY` +
 
 ****
 * There are 3 categories to pick:
@@ -667,7 +671,11 @@ e.g. `e 2 n/James Lee e/jameslee@example.com` +
 * *Find Person By* : f CATEGORY KEYWORD [MORE_KEYWORDS]` +
 e.g. `f name Jake Doe` +
 * *List* : `l` +
+* *Sort Person By* : `spb CATEGORY` +
+e.g. `spb grade` +
 * *ListTask* : `lt` +
+* *Sort Task By* : `stb CATEGORY` +
+e.g. `stb datetime` +
 * *Help* : `help` +
 * *Select* : `s INDEX` +
 e.g.`s 2` +

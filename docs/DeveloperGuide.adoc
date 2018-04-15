@@ -235,7 +235,10 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 // tag::addtutee[]
+
 === Add tutee Command
+==== Current Implementation
+
 ===== Reason for Implementation
 As the user of this application is the tutor, he or she will need to add the tutees' contact details.
 Since a tutee contains more details specific to them compared to a non-tutee, tutee contacts should not be mixed with the non-tutee contacts so that all the contacts are organized and can be managed easily.
@@ -428,8 +431,6 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 // tag::sortpersoncommand[]
 === Sort Person Command
-==== Current Implementation
-
 ===== Reason for Implementation
 As the amount of contacts stored grows, it would be harder to browse the address book. Hence, Sort Person Command is created
 to ease users's experience in organizing their address book.
@@ -445,7 +446,32 @@ A comparator object is required since the sorting implementation utilizes JavaFX
 Here, PersonSortUtil class is responsible in providing a suitable comparator that matches the sorting behaviour requested by the user. Upon receiving the comparator, SortPersonCommand
 calls the sortFilteredPersonList() method which utilises a SortedList object to perform the sorting.
 // end::sortpersoncommand[]
+// tag::natural[]
+=== Natural Language Identifier
+===== Reason for Implementation
+Figuring out the exact date for a tuition appointment can be tedious in some extent. Tutors would need to flip over a calendar, or to perform some
+operations in the context of this app. Based on this concern, as our goal is to simplify the life of tutor,
+we feel the importance of introducing a feature where tutors are able to set a tuition appointment not only by date,
+but also by using common terms such as: `today`, `next month`, etc.
 
+===== Current Implementation Limitation
+In the current implementation, common terms (or Natural Languages) are only identifiable by the `Find Task` command parser.
+
+===== How it is implemented
+A class named NaturalLanguageIdentifier applys the singleton design pattern as the class stores a private attribute that records the current time of the system clock.
+As this reference time must be the same throughout the entire execution of a command, this class should only be instantiated once.
+
+This class is responsible for identifying whether a given user input is a recognizable natural language and convert it
+into the desired format when applicable. In achieving this purpose, the public methods within this class are called by
+the command parsers that inherit Address Book parser. In general, these public methods have a certain characteristic.
+These methods always take in a user's input as parameter and either return the same input if it is not recognized as a valid natural language
+or return a processable form of the natural language. For example, given *this month* (a valid natural language) as user input,
+the getMonthAsString() method will return *April* (the current month).
+
+Valid or recognized natural languages are determined by a static list inside the NaturalLanguageIdentifier class.
+This list of Strings stores common terms used by tutors. If a given user input matches one of the terms in the list, that input
+is treated as a valid natural language.
+// end::natural[]
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
