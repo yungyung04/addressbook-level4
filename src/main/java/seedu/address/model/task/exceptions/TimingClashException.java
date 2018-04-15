@@ -1,4 +1,6 @@
-package seedu.address.model.person.exceptions;
+package seedu.address.model.task.exceptions;
+
+import static seedu.address.commons.core.Messages.MESSAGE_TASK_TIMING_CLASHES;
 
 import seedu.address.commons.exceptions.DuplicateDataException;
 
@@ -6,9 +8,8 @@ import seedu.address.commons.exceptions.DuplicateDataException;
 /**
  * Signals that there is a clash of timing in the schedule or there is a duplicate task
  */
-
 public class TimingClashException extends DuplicateDataException {
     public TimingClashException() {
-        super("This task clashes with another task");
+        super(MESSAGE_TASK_TIMING_CLASHES);
     }
 }
