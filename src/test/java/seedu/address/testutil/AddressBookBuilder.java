@@ -2,8 +2,11 @@ package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Task;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicateTaskException;
+import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,6 +46,20 @@ public class AddressBookBuilder {
             addressBook.addTag(new Tag(tagName));
         } catch (IllegalValueException ive) {
             throw new IllegalArgumentException("tagName is expected to be valid.");
+        }
+        return this;
+    }
+
+    /**
+     * Adds a new {@code Task} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withTask(Task task) {
+        try {
+            addressBook.addTask(task);
+        } catch (DuplicateTaskException dpe) {
+            throw new IllegalArgumentException("task is expected to be unique.");
+        } catch (TimingClashException tce) {
+            throw new IllegalArgumentException("Timing clash has occurred");
         }
         return this;
     }

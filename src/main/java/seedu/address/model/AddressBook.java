@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.DuplicateTaskException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.tag.Tag;
@@ -64,10 +65,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
-    public void setTasks(List<Task> tasks) throws TimingClashException {
+    //@@author a-shakra
+    public void setTasks(List<Task> tasks) throws DuplicateTaskException, TimingClashException {
         this.tasks.setTasks(tasks);
     }
-
+    //@@author
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      * ---Not modified for tasks yet!!!!!!
@@ -79,7 +81,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         List<Person> syncedPersonList = newData.getPersonList().stream()
                 .map(this::syncWithMasterTagList)
                 .collect(Collectors.toList());
-
+        try {
+            setTasks(taskList);
+        } catch (DuplicateTaskException e) {
+            throw new AssertionError("AddressBooks should not have duplicate tasks");
+        } catch (TimingClashException e) {
+            throw new AssertionError("Timing Clash");
+        }
         try {
             setPersons(syncedPersonList);
             setTasks(taskList);
@@ -87,6 +95,8 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new AssertionError("AddressBooks should not have duplicate persons");
         } catch (TimingClashException e) {
             throw new AssertionError("AddressBooks should not have clashed tasks");
+        } catch (DuplicateTaskException e) {
+            throw new AssertionError("AddressBooks should not have duplicate tasks");
         }
     }
 
@@ -134,8 +144,19 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      */
 
-    public void addTask(Task t) throws TimingClashException {
+
+    public void addTask(Task t) throws DuplicateTaskException, TimingClashException {
         tasks.add(t);
+    }
+
+    /**
+     * Updates a task to the address book.
+     *
+     */
+    public void updateTask(Task target, Task editedTask)
+            throws DuplicateTaskException, TaskNotFoundException {
+        requireNonNull(editedTask);
+        tasks.setTask(target, editedTask);
     }
     //@@author
     /**

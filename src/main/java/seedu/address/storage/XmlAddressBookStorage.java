@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.EncryptionUtil;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyAddressBook;
 
@@ -78,7 +77,7 @@ public class XmlAddressBookStorage implements AddressBookStorage {
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        EncryptionUtil.decrypt(file);
+        //EncryptionUtil.decrypt(file);
         XmlFileStorage.saveDataToFile(file, new XmlSerializableAddressBook(addressBook));
         //EncryptionUtil.encrypt(file);
     }
