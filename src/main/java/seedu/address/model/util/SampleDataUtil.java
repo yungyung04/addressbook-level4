@@ -62,19 +62,19 @@ public class SampleDataUtil {
     }
     public static Task[] getSampleTasks() {
         return new Task[]{
-            new PersonalTask(LocalDateTime.parse(DATETIME1, formatter), "2h30m", "exampleTask1"),
-            new TuitionTask("Alice", LocalDateTime.parse(DATETIME2, formatter), "2h30m", "exampleTask2"),
-            new PersonalTask(LocalDateTime.parse(DATETIME3, formatter), "2h30m", "exampleTask3"),
-            new PersonalTask(LocalDateTime.parse(DATETIME4, formatter), "2h30m", "exampleTask4"),
-            new PersonalTask(LocalDateTime.parse(DATETIME5, formatter), "2h30m", "exampleTask5"),
-            new PersonalTask(LocalDateTime.parse(DATETIME6, formatter), "2h30m", "exampleTask6"),
-            new PersonalTask(LocalDateTime.parse(DATETIME7, formatter), "2h30m", "exampleTask7"),
-            new PersonalTask(LocalDateTime.parse(DATETIME8, formatter), "2h30m", "exampleTask8"),
-            new TuitionTask("John", LocalDateTime.parse(DATETIME9, formatter), "2h30m",
+            new PersonalTask(LocalDateTime.parse(DATETIME1, formatter), "2h15m", "exampleTask1"),
+            new TuitionTask("Alice", LocalDateTime.parse(DATETIME2, formatter), "5h25m", "exampleTask2"),
+            new PersonalTask(LocalDateTime.parse(DATETIME3, formatter), "3h45m", "exampleTask3"),
+            new PersonalTask(LocalDateTime.parse(DATETIME4, formatter), "12h10m", "exampleTask4"),
+            new PersonalTask(LocalDateTime.parse(DATETIME5, formatter), "02h45m", "exampleTask5"),
+            new PersonalTask(LocalDateTime.parse(DATETIME6, formatter), "06h55m", "exampleTask6"),
+            new PersonalTask(LocalDateTime.parse(DATETIME7, formatter), "03h11m", "exampleTask7"),
+            new PersonalTask(LocalDateTime.parse(DATETIME8, formatter), "08h18m", "exampleTask8"),
+            new TuitionTask("John", LocalDateTime.parse(DATETIME9, formatter), "10h28m",
                     "exampleTask9"),
-            new TuitionTask("Eka", LocalDateTime.parse(DATETIME10, formatter), "2h30m",
+            new TuitionTask("Eka", LocalDateTime.parse(DATETIME10, formatter), "11h30m",
                     "exampleTask10"),
-            new TuitionTask("Chochitun", LocalDateTime.parse(DATETIME11, formatter), "2h30m",
+            new TuitionTask("Chochitun", LocalDateTime.parse(DATETIME11, formatter), "12h30m",
                     "exampleTask11"),
         };
     }
