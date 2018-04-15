@@ -3,9 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.exceptions.DuplicateTaskException;
-import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.personal.PersonalTask;
+import seedu.address.model.task.exceptions.TimingClashException;
 
 //@@author yungyung04
 /**
@@ -44,8 +43,6 @@ public class AddPersonalTaskCommand extends UndoableCommand {
             model.addTask(toAdd);
         } catch (TimingClashException tce) {
             throw new CommandException(tce.getMessage());
-        } catch (DuplicateTaskException dte) {
-            throw new CommandException(dte.getMessage());
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

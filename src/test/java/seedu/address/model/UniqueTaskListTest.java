@@ -10,9 +10,8 @@ import org.junit.Test;
 
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.person.exceptions.DuplicateTaskException;
-import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.personal.PersonalTask;
+import seedu.address.model.task.exceptions.TimingClashException;
 import seedu.address.model.tutee.TuitionTask;
 import seedu.address.testutil.Assert;
 import systemtests.SystemTestSetupHelper;
@@ -45,8 +44,6 @@ public class UniqueTaskListTest {
             createTaskList();
         } catch (TimingClashException e) {
             throw new AssertionError("Should not have any clashed timing");
-        } catch (DuplicateTaskException dte) {
-            throw new AssertionError("Should not have duplicate tasks");
         }
         // New task starts at the same time as an existing task
         Assert.assertThrows(TimingClashException.class, () ->
@@ -82,7 +79,7 @@ public class UniqueTaskListTest {
     /**
      * Generates a list of existing tasks
      */
-    private void createTaskList() throws TimingClashException, DuplicateTaskException {
+    private void createTaskList() throws TimingClashException {
         uniqueTaskList.add(new TuitionTask("Anne",
                 LocalDateTime.parse("11/01/2011 22:00", formatter), "1h30m", "tuition 1"));
         uniqueTaskList.add(new PersonalTask(

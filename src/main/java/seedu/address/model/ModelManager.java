@@ -16,11 +16,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.DuplicateTaskException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
+import seedu.address.model.task.exceptions.TimingClashException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -94,7 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
     //@@author a-shakra
     @Override
-    public synchronized void addTask(Task aTask) throws DuplicateTaskException, TimingClashException {
+    public synchronized void addTask(Task aTask) throws TimingClashException {
         addressBook.addTask(aTask);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS); //Change to new predicate?
         indicateAddressBookChanged();

@@ -9,9 +9,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicateTaskException;
-import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
+import seedu.address.model.task.exceptions.TimingClashException;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
@@ -39,31 +38,23 @@ public class UniqueTaskList implements Iterable<Task> {
      * @throws TimingClashException if there is a clash in timing with an existing task
      */
 
-    public void add(Task toAdd) throws DuplicateTaskException, TimingClashException {
+    public void add(Task toAdd) throws TimingClashException {
         requireNonNull(toAdd);
         if (isTimeClash(toAdd.getTaskDateTime(), toAdd.getDuration())) {
             throw new TimingClashException();
         }
         internalList.add(toAdd);
     }
-    //@@author
+    //@@author a-shakra
     /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.
-     *
-     *
      */
-    //@@author a-shakra
-    public void setTask(Task target, Task editedTask)
-            throws DuplicateTaskException, TaskNotFoundException {
+    public void setTask(Task target, Task editedTask) throws TaskNotFoundException {
         requireNonNull(editedTask);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new TaskNotFoundException();
-        }
-
-        if (!target.equals(editedTask) && internalList.contains(editedTask)) {
-            throw new DuplicateTaskException();
         }
         internalList.set(index, editedTask);
     }
@@ -87,7 +78,7 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
 
-    public void setTasks(List<Task> tasks) throws DuplicateTaskException, TimingClashException {
+    public void setTasks(List<Task> tasks) throws TimingClashException {
         requireAllNonNull(tasks);
         final UniqueTaskList replacement = new UniqueTaskList();
         for (final Task task : tasks) {
@@ -142,7 +133,7 @@ public class UniqueTaskList implements Iterable<Task> {
         taskEndTime = startDateTime.plusHours(hoursInDuration).plusMinutes(minutesInDuration);
         return taskEndTime;
     }
-    //@@author
+
     //@@author a-shakra
     @Override
     public Iterator<Task> iterator() {

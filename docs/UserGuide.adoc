@@ -45,7 +45,7 @@ This app will not work with earlier versions of Java 8.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 // tag::ui_overview[]
-image::Ui_with_overview.jpg[width="400"]
+image::Ui_with_overview.jpg[width="650"]
 // end::ui_overview[]
 [NOTE]
 If "license check has failed" message pops up, simply click "OK".
@@ -115,14 +115,16 @@ Using Command Word: +
 Format: `addtutee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECT g/GRADE edu/EDUCATION_LEVEL sch/SCHOOL [t/TAG]...`
 
 [TIP]
-A tutee can have any number of tags (including 0)
+====
+* A tutee can have any number of tags (including 0)
+* Special character in grade can be anything since different institution may use different grading system. +
+i.e. B+, B3, B$, B# etc are all valid
+====
 
-[NOTE]
+[WARNING]
 ====
 * Education level can only be either primary, secondary or junior college (NOT case sensitive) +
 * All details except tag MUST be added
-* Special character in grade can be anything since different institution may use different grading system. +
-i.e. B+, B3, B$, B# etc are all valid
 ====
 
 Examples:
@@ -134,7 +136,7 @@ Examples:
 
 === Listing all persons : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all contacts in the address book. +
 Using Command Word: +
 Format: `list` +
 Using Command Alias: +
@@ -148,30 +150,61 @@ Using Command Word: +
 Format: `listtutee` +
 // end::listtutee[]
 
+// tag::edit[]
 === Editing a person : `edit`
 
-Edits an existing person's detail in the address book. +
+Edits existing contact's details in the address book. +
 Using Command Word: +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [s/SUBJECT] [g/GRADE] [edu/EDUCATION_LEVEL] [sch/SCHOOL] [t/TAG]...` +
 Using Comamnd Alias: +
-Format: `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+Format: `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [s/SUBJECT] [g/GRADE] [edu/EDUCATION_LEVEL] [sch/SCHOOL] [t/TAG]...` +
+
+[width="80%",cols="20%, 60%",options="header",]
+|=======================================================================
+|Keyword |Description
+|edit |To call the edit command
+|INDEX |Index number shown in the last person listing. It *must be a positive integer* 1, 2, 3, ...
+|INDEX |The contact at the specified `INDEX` will be edited
+|=======================================================================
 
 [NOTE]
 ====
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the last person listing. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-* This command is able to edit the general details of a tutee (name, phone, email, address and tags). However, it is unable to edit tutee's details (subject, grade, education level, school and tutee tag).
+* "Tutee" tag is specific to tutee only and will never be removed.
+* Remove all the person's tags: type `t/` without specifying any tags after it.
+* Remove all the tutee's tags except "Tutee" tag: type `t/` without specifying any tags after it OR type `t/tutee` (this includes other variation of case letters for tutee such as "TUTEE", "TuteE" etc).
+====
+
+[underline]#*Valid Details to edit for each type of contact:*#
+[width="80%",cols="40%, 40%",options="header",]
+|=======================================================================
+|Person |Tutee
+|NAME |NAME
+|PHONE |PHONE
+|EMAIL |EMAIL
+|ADDRESS |ADDRESS
+| --- |SUBJECT
+| --- |GRADE
+| --- |EDUCATION_LEVEL
+| --- |SCHOOL
+|TAG |TAG
+|=======================================================================
+
+[WARNING]
+====
+* At least one of the valid optional fields must be provided.
+* Existing information will be updated to the new information.
+* When editing tags, the existing tags of the contact will be removed (Except "Tutee" tag) i.e adding of tags is not cumulative.
+* Manual adding of "Tutee" tag to a person is not allowed (this includes other variation of case letters for tutee such as "tutee", "TuTeE" etc)
+* Editing of subject, grade, education level and school is not allowed for person
 ====
 
 Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `e 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+* `e 2 n/Betsy Crower sch/JohnDoe Secondary t/` +
+Edits the name of the 2nd contact (a tutee) to be `Betsy Crower`, her school to `JohnDoe Secondary` and clears all existing tags (except "Tutee" tag).
+// end::edit[]
 
 // tag::findperson[]
 === Locating persons by category: `findpersonby`
@@ -213,6 +246,8 @@ Lists all tutee with grade `B` and `B+`
 Sorts your displayed contact list according to a specified category in ascending order (lexicographically). +
 Using Command Word: +
 Format: `sortpersonby CATEGORY` +
+Using Command Alias: +
+Format: `spb CATEGORY` +
 
 ****
 * There are 5 categories to pick:
@@ -437,6 +472,8 @@ Lists all tasks scheduled on February, June and October.
 Sorts your displayed task list according to a specified category in ascending order. +
 Using Command Word: +
 Format: `sorttaskby CATEGORY` +
+Using Command Alias: +
+Format: `stb CATEGORY` +
 
 ****
 * There are 3 categories to pick:
@@ -607,12 +644,6 @@ Edits date, time, duration or description of an existing task and reflects the c
 View the location of a specific contact's address on google map and the shortest route from the current location will be displayed.
 // end::ChoChihTunV2.0[]
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
-
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -628,7 +659,7 @@ e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 123466
 * *Clear* : `clear` +
 * *Delete* : `delete PERSON_INDEX` +
 e.g. `delete 3` +
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [s/SUBJECT] [g/GRADE] [edu/EDUCATION_LEVEL] [sch/SCHOOL] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com` +
 * *Find Person By* : findpersonby CATEGORY KEYWORD [MORE_KEYWORDS]` +
 e.g. `findpersonby name Jake Doe` +
@@ -662,12 +693,16 @@ e.g. `a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 
 * *Clear* : `c` +
 * *Delete* : `d INDEX` +
 e.g. `d 3` +
-* *Edit* : `e INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+* *Edit* : `e INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/SUBJECT] [s/SUBJECT] [g/GRADE] [edu/EDUCATION_LEVEL] [sch/SCHOOL] [t/TAG]...` +
 e.g. `e 2 n/James Lee e/jameslee@example.com` +
 * *Find Person By* : f CATEGORY KEYWORD [MORE_KEYWORDS]` +
 e.g. `f name Jake Doe` +
 * *List* : `l` +
+* *Sort Person By* : `spb CATEGORY` +
+e.g. `spb grade` +
 * *ListTask* : `lt` +
+* *Sort Task By* : `stb CATEGORY` +
+e.g. `stb datetime` +
 * *Help* : `help` +
 * *Select* : `s INDEX` +
 e.g.`s 2` +
