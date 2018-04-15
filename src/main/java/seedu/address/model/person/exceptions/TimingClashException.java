@@ -10,6 +10,6 @@ import seedu.address.commons.exceptions.DuplicateDataException;
 
 public class TimingClashException extends DuplicateDataException {
     public TimingClashException() {
-        super("Timing of task clashes with another task");
+        super("This task clashes with another task");
     }
 }

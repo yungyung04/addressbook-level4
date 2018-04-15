@@ -2,19 +2,19 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: Enhance Address Book Level 4 : Tuition Connect
+== PROJECT: Development of Address Book Level 4 : Tuition Connect
 
 ---
 
 == Overview
 
-TuitionConnect is an integration of desktop address book and task manager optimized to be used by private tuition teacher. TuitionConnect aims to help tutors in managing their busy schedule efficiently and effectively.
+TuitionConnect is an integration of address book and task manager optimized to be used by private tuition teacher for managing their busy schedule efficiently and effectively.
 
 == Summary of contributions
 
 * *Major enhancement*: added *scheduling features
 ** What it does: allows the users to organize their activities neatly by creating and deleting tasks.
-Also allows users to browse through their schedule with ease using the find and sort utilities.
+Also, allows users to browse through their schedule with ease using the find and sort utilities.
 
 * *Minor enhancements*
 ** Implemented tutee listing, filtering and sorting features.
@@ -39,13 +39,13 @@ Also allows users to browse through their schedule with ease using the find and 
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+include::../UserGuide.adoc[tag=ui_overview]
+
 include::../UserGuide.adoc[tag=conceptintro]
 
-include::../UserGuide.adoc[tag=findtask]
+include::../UserGuide.adoc[tag=addtuition]
 
 include::../UserGuide.adoc[tag=sorttask]
-
-include::../UserGuide.adoc[tag=deletetask]
 
 == Contributions to the Developer Guide
 
@@ -54,3 +54,7 @@ include::../UserGuide.adoc[tag=deletetask]
 |===
 
 include::../DeveloperGuide.adoc[tag=sortpersoncommand]
+
+include::../DeveloperGuide.adoc[tag=classDiagram]
+
+include::../DeveloperGuide.adoc[tag=storageDiagram]

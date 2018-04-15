@@ -46,13 +46,13 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         internalList.add(toAdd);
     }
-
+    //@@author
     /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.
      *
      *
      */
-
+    //@@author a-shakra
     public void setTask(Task target, Task editedTask)
             throws DuplicateTaskException, TaskNotFoundException {
         requireNonNull(editedTask);
@@ -67,8 +67,8 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         internalList.set(index, editedTask);
     }
-    //@@author
-    //@@author a-shakra
+
+
     /**
      * Removes the equivalent task from the list.
      *
@@ -127,7 +127,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         return false;
     }
-    //@@author
+
     /**
      * Returns date and time when the task ends
      */

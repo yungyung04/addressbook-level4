@@ -10,7 +10,7 @@ import java.util.List;
 import org.junit.Test;
 
 import seedu.address.testutil.TaskBuilder;
-
+//@@author a-shakra
 public class TaskContainsKeywordsPredicateTest {
 
     @Test
@@ -57,28 +57,6 @@ public class TaskContainsKeywordsPredicateTest {
         // Mixed-case keywords
         predicate = new TaskContainsKeywordsPredicate(Arrays.asList("eXampleTask1", "ExampleTask2"));
         assertTrue(predicate.test(new TaskBuilder().withDescription("exampleTask1 exampleTask2").buildPersonalTask()));
-    }
-
-    @Test
-    public void test_taskDoesNotContainKeywords_returnsFalse() {
-        // Zero keywords
-        TaskContainsKeywordsPredicate predicate = new TaskContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new TaskBuilder().withDescription("exampleTask1").buildPersonalTask()));
-
-        // Non-matching keyword
-        predicate = new TaskContainsKeywordsPredicate(Arrays.asList("exampleTask3"));
-        assertFalse(predicate.test(new TaskBuilder().withDescription("exampleTask1 exampleTask2").buildPersonalTask()));
-
-        // Keywords match duration and dateandtime, but does not match description
-        predicate = new TaskContainsKeywordsPredicate(Arrays.asList("exampleTask1", "03:20", "02-05-2018 23:20"));
-        assertFalse(predicate.test(new TaskBuilder().withDescription("exampleTask3").withDuration("03:20")
-                .withDateTime("02-05-2018 23:20").buildPersonalTask()));
-
-        // Keywords match description and duration, but does not match name
-        predicate = new TaskContainsKeywordsPredicate(Arrays.asList("exampleTask1", "03:20", "02-05-2018 03:20"));
-        assertFalse(predicate.test(new TaskBuilder().withDescription("exampleTask2").withDuration("03:20")
-                .withDateTime("02-05-2018 03:20").buildPersonalTask()));
-
     }
 }
 

@@ -65,10 +65,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tags.setTags(tags);
     }
 
+    //@@author a-shakra
     public void setTasks(List<Task> tasks) throws DuplicateTaskException, TimingClashException {
         this.tasks.setTasks(tasks);
     }
-
+    //@@author
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      * ---Not modified for tasks yet!!!!!!
@@ -157,7 +158,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedTask);
         tasks.setTask(target, editedTask);
     }
-
+    //@@author
     /**
      *  Updates the master tag list to include tags in {@code person} that are not in the list.
      *  @return a copy of this {@code person} such that every tag in this person points to a Tag object in the master

@@ -100,7 +100,9 @@ public class CommandTestUtil {
     public static final String INVALID_EDUCATION_LEVEL = " " + PREFIX_EDUCATION_LEVEL + "university";
     public static final String INVALID_SCHOOL = " " + PREFIX_SCHOOL + "hanyang@1"; // should only be alphabetic
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TUTEE_TAG_DESC = " " + PREFIX_TAG + "Tutee"; // 'tutee' tag not allowed in person
 
+    public static final String TUTEE_TAG = "Tutee";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

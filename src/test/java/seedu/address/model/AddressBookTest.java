@@ -61,7 +61,7 @@ public class AddressBookTest {
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
     }
-
+    //@@author a-shakra
     @Test
     public void resetData_withDuplicateTasks_throwsAssertionError() {
         // Repeat EXAMPLE1 twice
@@ -73,7 +73,7 @@ public class AddressBookTest {
         thrown.expect(AssertionError.class);
         addressBook.resetData(newData);
     }
-
+    //@@author
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
@@ -85,13 +85,13 @@ public class AddressBookTest {
         thrown.expect(UnsupportedOperationException.class);
         addressBook.getTagList().remove(0);
     }
-
+    //@@author a-shakra
     @Test
     public void getTaskList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         addressBook.getTaskList().remove(0);
     }
-
+    //@@author
     @Test
     public void removeTag_existingTag_tagRemoved() throws Exception {
         Person person = new PersonBuilder().build();

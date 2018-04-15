@@ -17,6 +17,7 @@ import seedu.address.model.UserPrefs;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListTaskCommand.
  */
+//@@author a-shakra
 public class ListTaskCommandTest {
 
     private Model model;
@@ -41,6 +42,6 @@ public class ListTaskCommandTest {
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showTaskAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(listTaskCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(listTaskCommand, model, ListTaskCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

@@ -23,11 +23,9 @@ import seedu.address.model.tutee.TuitionTask;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-
     public static final String DATETIME1 = "03/04/2018 2:30";
     public static final String DATETIME2 = "05/04/2018 2:30";
     public static final String DATETIME3 = "07/04/2018 2:30";
-
 
     public static Person[] getSamplePersons() {
         return new Person[] {
@@ -51,7 +49,6 @@ public class SampleDataUtil {
                 getTagSet("colleagues"))
         };
     }
-
     public static Task[] getSampleTasks() {
         return new Task[]{
             new PersonalTask(LocalDateTime.parse(DATETIME1), "2:30", "exampleTask1"),

@@ -44,7 +44,9 @@ This app will not work with earlier versions of Java 8.
 .  Copy the file to the folder you want to use as the home folder for TuitionConnect.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+// tag::ui_overview[]
+image::Ui_with_overview.jpg[width="400"]
+// end::ui_overview[]
 [NOTE]
 If "license check has failed" message pops up, simply click "OK".
 +
@@ -138,11 +140,12 @@ Format: `list` +
 Using Command Alias: +
 Format: `l`
 
+
 // tag::listTask[]
 === Listing all tasks : `listTask`
 Shows a list of all tasks in the task list. +
 Using Command Word: +
-Format: `listTask` +
+Format: `listtask` +
 Using Command Alias: +
 Format: `lt` +
 The purpose of the listTask command is to regenerate +
@@ -359,6 +362,18 @@ Examples:
 * `addtask 10/05/2018 12:00 1h30m Outing with friend`
 * `addtask 31/12/2018 16:00 0h30m`
 // end::addtask[]
+
+// tag::listTask[]
+=== Listing all tasks : `listtask`
+Shows a list of all tasks in the task list. +
+Using Command Word: +
+Format: `listtask` +
+Using Command Alias: +
+Format: `lt` +
+The purpose of the listtask command is to regenerate +
+the complete list of tasks for a user in the event that +
+only a specific set of tasks were displayed.
+// end::listTask[]
 
 // tag::deletetask[]
 === Deleting a task: `deletetask`
@@ -641,6 +656,7 @@ e.g.`select 2` +
 e.g. `addtuition 1 10/05/2018 12:00 1h30m Calculus homework page 24` +
 * *Add Task* : 'add DATE TIME DURATION [DESCRIPTION] +
 e.g. `addtask 10/05/2018 12:00 1h30m Going out with friends` +
+* *List Task* : 'listtask` +
 * *Delete Task* : 'delete TASK_INDEX` +
 e.g. `delete 1` +
 * *Find Task By* : findtaskby CATEGORY FIND_TYPE KEYWORD [MORE_KEYWORDS]` +
@@ -664,6 +680,7 @@ e.g. `e 2 n/James Lee e/jameslee@example.com` +
 * *Find Person By* : f CATEGORY KEYWORD [MORE_KEYWORDS]` +
 e.g. `f name Jake Doe` +
 * *List* : `l` +
+* *ListTask* : `lt` +
 * *Help* : `help` +
 * *Select* : `s INDEX` +
 e.g.`s 2` +
