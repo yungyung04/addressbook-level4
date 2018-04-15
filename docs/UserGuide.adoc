@@ -354,7 +354,7 @@ for more information about Tutee.
 *** invalid example : 1h60m
 **** the duration in minute must be a number between 0 and 59.
 *** invalid example : 30m
-**** a correct duration for 30m tuition is *0h30m*.
+**** a correct duration for a 30 minute tuition is *0h30m*.
 
 * DESCRIPTION
 ** Description can be of any format.
@@ -364,7 +364,7 @@ for more information about Tutee.
 
 Examples:
 
-* `addtuition 1 10/05/2018 12:00 1h30m Calculus homework page 24`
+* `addtuition 1 10/05/2018 09:00 1h30m Calculus homework page 24`
 * `addtuition 1 31/12/2018 16:00 0h30m`
 // end::addtuition[]
 
@@ -381,7 +381,7 @@ The parameters (DATE, TIME, DURATION AND DESCRIPTION) have the same structure an
 
 Examples:
 
-* `addtask 10/05/2018 12:00 1h30m Outing with friend`
+* `addtask 10/05/2018 09:00 1h30m Outing with friend`
 * `addtask 31/12/2018 16:00 0h30m`
 // end::addtask[]
 
