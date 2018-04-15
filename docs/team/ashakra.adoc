@@ -26,14 +26,14 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 * *Minor enhancement*: added a listTask command that allows the user to view all tasks stored in the addressbook.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://github.com/CS2103JAN2018-T11-B1/main/blob/master/collated/functional/a-shakra.md[Functional code]] [https://github.com/CS2103JAN2018-T11-B1/main/blob/master/collated/test/a-shakra.md[Test code]]
 
 * *Other contributions*:
 
 ** Project management:
 *** Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Wrote additional tests for existing features (Pull requests https://github.com[#68])
+*** Wrote additional tests for existing features (https://github.com[#68], https://github.com[#140])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#68]
 *** Updated Developer Guide to explain features: https://github.com[#68]

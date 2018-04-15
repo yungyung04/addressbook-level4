@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
@@ -34,11 +33,4 @@ public class TaskUtil {
         return sb.toString();
     }
 
-    /**
-     * Converts a date and time string to a local date time object
-     */
-    public static LocalDateTime toLocalDateAndTime(String sDateAndTime) {
-        LocalDateTime lDateAndTime = LocalDateTime.parse(sDateAndTime, FORMATTER);
-        return lDateAndTime;
-    }
 }

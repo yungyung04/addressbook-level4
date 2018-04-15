@@ -15,10 +15,10 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.person.exceptions.TimingClashException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
+import seedu.address.model.task.exceptions.TimingClashException;
 import seedu.address.model.tutee.Tutee;
 
 /**
@@ -142,14 +142,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.add(t);
     }
 
-    /**
-     * Updates a task to the address book.
-     *
-     */
-    public void updateTask(Task target, Task editedTask) throws TaskNotFoundException {
-        requireNonNull(editedTask);
-        tasks.setTask(target, editedTask);
-    }
     //@@author
     /**
      *  Updates the master tag list to include tags in {@code person} that are not in the list.
