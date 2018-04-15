@@ -1,6 +1,8 @@
 package seedu.address.model.util;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,9 +25,11 @@ import seedu.address.model.tutee.TuitionTask;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static final String DATETIME1 = "03/04/2018 2:30";
-    public static final String DATETIME2 = "05/04/2018 2:30";
-    public static final String DATETIME3 = "07/04/2018 2:30";
+    public static final String DATETIME1 = "03/04/2018 02:30";
+    public static final String DATETIME2 = "05/04/2018 02:30";
+    public static final String DATETIME3 = "07/04/2018 02:30";
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public static Person[] getSamplePersons() {
         return new Person[] {
@@ -50,10 +54,13 @@ public class SampleDataUtil {
         };
     }
     public static Task[] getSampleTasks() {
+        LocalDateTime time1 = LocalDateTime.parse(DATETIME1, formatter);
+        LocalDateTime time2 = LocalDateTime.parse(DATETIME2, formatter);
+        LocalDateTime time3 = LocalDateTime.parse(DATETIME3, formatter);
         return new Task[]{
-            new PersonalTask(LocalDateTime.parse(DATETIME1), "2:30", "exampleTask1"),
-            new TuitionTask("Alice", LocalDateTime.parse(DATETIME2), "2:30", "exampleTask2"),
-            new PersonalTask(LocalDateTime.parse(DATETIME3), "2:30", "exampleTask3")
+            new PersonalTask(time1, "2h30m", "exampleTask1"),
+            new TuitionTask("Alice", time2, "2h30m", "exampleTask2"),
+            new PersonalTask(time3, "2h30m", "exampleTask3")
         };
     }
 
