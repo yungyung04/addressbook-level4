@@ -9,6 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 //@@author ChoChihTun
 /**
@@ -31,6 +32,16 @@ public class Tutee extends Person {
         this.grade = grade;
         this.educationLevel = educationLevel;
         this.school = school;
+
+        Tag tuteeTag = new Tag("Tutee");
+        if (!this.tags.contains(tuteeTag)) {
+            try {
+                this.tags.add(tuteeTag);
+            } catch (UniqueTagList.DuplicateTagException e) {
+                // Should not have duplicate tag
+                assert (false);
+            }
+        }
     }
 
     public Subject getSubject() {
