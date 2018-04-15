@@ -119,38 +119,19 @@ public class PersonalTask implements Task {
     }
 
     /**
-     * Returns true if the two tasks are equal. Needs to be updated to reflect the name parameter
-     */
-
-
-    /**
      * Returns true if the tuition task contains a non-empty description.
      */
     private boolean hasDescription() {
         return !description.equals(NULL_STRING);
     }
 
-
-    /**
-     * this fixes the valid args test, but has conflict with Task card
-     * ^ I, a-shakra, didn't write this but I kept it because I wasn't sure what is meant by it
-     * Remove if all is clear but notify me before please
-     */
-    //@@author a-shakra
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof Task)) {
-            return false;
-        }
-
-        Task otherTask = (Task) other;
-        return otherTask.getDescription().equals(this.getDescription())
-                && otherTask.getDuration().equals(this.getDuration())
-                && otherTask.getTaskDateTime().toString().equals(this.getTaskDateTime().toString());
+        return other == this // short circuit if same object
+                || (other instanceof PersonalTask // instanceof handles nulls
+                && taskDateTime.equals(((PersonalTask) other).taskDateTime)
+                && duration.equals(((PersonalTask) other).duration)
+                && description.equals(((PersonalTask) other).description));
     }
 
 }

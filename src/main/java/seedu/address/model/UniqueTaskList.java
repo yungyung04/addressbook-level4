@@ -61,7 +61,6 @@ public class UniqueTaskList implements Iterable<Task> {
 
     /**
      * Removes the equivalent task from the list.
-     *
      */
     public boolean remove(Task toRemove) throws TaskNotFoundException {
         requireNonNull(toRemove);

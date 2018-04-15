@@ -47,7 +47,7 @@ public class PersonSortUtil {
             comparator = getSubjectComparator();
             break;
         default:
-            logger.severe("an invalid category is identified in PersonSOrtUtil class.");
+            logger.severe("an invalid category is identified in PersonSortUtil class.");
             assert (false); //invalid sortCategory should be identified in parser.
         }
         return comparator;
@@ -210,8 +210,8 @@ public class PersonSortUtil {
     }
 
     /**
-     * Compares the name of 2 given person and returns an integer according to their lexicographical relationn
-     * Integer returdned follows the behaviour of {@code compareTo} in Java.lang.String
+     * Compares the name of 2 given persons and returns an integer according to their lexicographical relationn
+     * Integer returned follows the behaviour of {@code compareTo} in Java.lang.String
      *
      * @param person1 first person to be compared
      * @param person2 second person to be compared

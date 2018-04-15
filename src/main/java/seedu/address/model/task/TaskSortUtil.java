@@ -33,7 +33,7 @@ public class TaskSortUtil {
             comparator = getDateTimeComparator();
             break;
         default:
-            logger.severe("an invalid category is identified in PersonSOrtUtil class.");
+            logger.severe("an invalid category is identified in TaskSortUtil class.");
             assert (false); //invalid sortCategory should be identified in parser.
         }
         return comparator;
