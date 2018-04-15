@@ -1,10 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.testutil.TaskUtil.toLocalDateAndTime;
 import static seedu.address.testutil.TypicalTasks.EXAMPLE1;
-
-import java.time.LocalDateTime;
 
 import org.junit.Test;
 
@@ -12,8 +9,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedTaskTest {
-    private static final String INVALID_DURATION = "3:20";
-    private static final String INVALID_DATEANDTIME = "02/05/2018";
+    private static final String INVALID_DURATION = "3";
+    private static final String INVALID_DATEANDTIME = "02/03/2018T03:20";
 
     private static final String VALID_DESCRIPTION = "A description";
 
@@ -29,38 +26,22 @@ public class XmlAdaptedTaskTest {
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
         XmlAdaptedTask task = new XmlAdaptedTask(null, VALID_DURATION, VALID_DATEANDTIME);
-        String expectedMessage = "Description cannot be set to null";
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidDuration_throwsIllegalValueException() {
-        XmlAdaptedTask task =
-                new XmlAdaptedTask(VALID_DESCRIPTION, INVALID_DURATION, VALID_DATEANDTIME);
-        String expectedMessage = "Invalid Duration";
+        String expectedMessage = "Task's Tasks Should have a non-empty description field is missing!";
         Assert.assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
     public void toModelType_nullDuration_throwsIllegalValueException() {
         XmlAdaptedTask task = new XmlAdaptedTask(VALID_DESCRIPTION, null, VALID_DATEANDTIME);
-        String expectedMessage = "Duration cannot be set to null";
+        String expectedMessage = "Task's Duration must be a non-null value field is missing!";
         Assert.assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
-    public void toModelType_invalidDateAndTime_throwsIllegalValueException() {
-        XmlAdaptedTask task =
-                new XmlAdaptedTask(VALID_DESCRIPTION, VALID_DURATION, INVALID_DATEANDTIME);
-        String expectedMessage = "Task's %s field is missing!";
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullDateAndTime_throwsIllegalValueException() {
+    public void toModelType_nullDateAndTime_throwsNullPointerException() {
         XmlAdaptedTask task = new XmlAdaptedTask(VALID_DESCRIPTION, VALID_DURATION, null);
-        String expectedMessage = "Task's %s field is missing!";
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
+        String expectedMessage = "text";
+        Assert.assertThrows(NullPointerException.class, expectedMessage, task::toModelType);
     }
 
 }

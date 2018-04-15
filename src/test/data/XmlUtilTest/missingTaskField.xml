@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Task with a missing duration field -->
+<!-- Task with a missing dateandtime field -->
 <tasks>
     <description>exampleTask1</description>
-    <dateandtime>05/02/2018 3:20</dateandtime>
+    <duration>3:20</duration>
 </tasks>

@@ -24,7 +24,7 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TestUtil;
 
-
+//@@author a-shakra
 public class XmlUtilTest {
 
     private static final String TEST_DATA_FOLDER = FileUtil.getPath("src/test/data/XmlUtilTest/");
@@ -39,12 +39,11 @@ public class XmlUtilTest {
     private static final File VALID_TASK_FILE = new File(TEST_DATA_FOLDER + "validTask.xml");
     private static final File TEMP_FILE = new File(TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml"));
 
-    private static final String INVALID_DURATION = "3h2m";
-
     private static final String VALID_DURATION = "3h20m";
     private static final String VALID_DESCRIPTION = "exampleTask1";
-    private static final String VALID_DATEANDTIME = "02/03/2018 03:20";
-
+    private static final String VALID_DATEANDTIME = "02/03/2018T03:20";
+    private static final String INVALID_DATEANDTIME = "2018-00-00T03:20";
+    //@@author
     private static final String INVALID_PHONE = "9482asf424";
 
     private static final String VALID_NAME = "Hans Muster";
@@ -102,7 +101,7 @@ public class XmlUtilTest {
         XmlAdaptedTask actualTask = XmlUtil.getDataFromFile(
                 MISSING_TASK_FIELD_FILE, XmlAdaptedTaskWithRootElement.class);
         XmlAdaptedTask expectedTask = new XmlAdaptedTask(
-                "exampleTask1", null, VALID_DATEANDTIME);
+                "exampleTask1", "3:20", null);
         assertEquals(expectedTask, actualTask);
     }
 
@@ -120,7 +119,7 @@ public class XmlUtilTest {
         XmlAdaptedTask actualTask = XmlUtil.getDataFromFile(
                 INVALID_TASK_FIELD_FILE, XmlAdaptedTaskWithRootElement.class);
         XmlAdaptedTask expectedTask = new XmlAdaptedTask(
-                VALID_DESCRIPTION, INVALID_DURATION, VALID_DATEANDTIME);
+                VALID_DESCRIPTION, VALID_DURATION, INVALID_DATEANDTIME);
         assertEquals(expectedTask, actualTask);
     }
 
@@ -179,8 +178,8 @@ public class XmlUtilTest {
     }
 
     /**
-     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedPerson}
-     * objects.
+     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedPerson,
+     * @code XmlAdaptedTask} objects.
      */
     @XmlRootElement(name = "person")
     private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}

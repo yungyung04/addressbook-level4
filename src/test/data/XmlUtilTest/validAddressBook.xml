@@ -57,16 +57,16 @@
     <tasks>
         <description>exampleTask1</description>
         <duration>3h20m</duration>
-        <dateAndTime>02/05/2018 03:20</dateAndTime>
+        <dateAndTime>2018-05-02T03:20</dateAndTime>
     </tasks>
     <tasks>
         <description>exampleTask2</description>
         <duration>3h20m</duration>
-        <dateAndTime>02/05/2018 13:20</dateAndTime>
+        <dateAndTime>2018-06-02T03:20</dateAndTime>
     </tasks>
     <tasks>
         <description>exampleTask3</description>
         <duration>3h20m</duration>
-        <dateAndTime>02/05/2018 23:20</dateAndTime>
+        <dateAndTime>2018-07-02T03:20</dateAndTime>
     </tasks>
 </addressbook>

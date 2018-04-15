@@ -142,7 +142,7 @@ Format: `l`
 === Listing all tasks : `listTask`
 Shows a list of all tasks in the task list. +
 Using Command Word: +
-Format: `listTask` +
+Format: `listtask` +
 Using Command Alias: +
 Format: `lt` +
 The purpose of the listTask command is to regenerate +

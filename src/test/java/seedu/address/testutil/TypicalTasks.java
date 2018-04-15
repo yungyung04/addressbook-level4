@@ -17,9 +17,11 @@ public class TypicalTasks {
     public static final Task EXAMPLE1 = new TaskBuilder().withTuteeName(null).withDescription("exampleTask1")
             .withDuration("3h20m").withDateTime("02/05/2018 03:20").buildPersonalTask();
     public static final Task EXAMPLE2 = new TaskBuilder().withTuteeName(null).withDescription("exampleTask2")
-            .withDuration("3h20m").withDateTime("02/05/2018 13:20").buildPersonalTask();
+            .withDuration("3h20m").withDateTime("02/04/2018 13:20").buildPersonalTask();
     public static final Task EXAMPLE3 = new TaskBuilder().withTuteeName(null).withDescription("exampleTask3")
-            .withDuration("3h20m").withDateTime("02/05/2018 23:20").buildPersonalTask();
+            .withDuration("3h20m").withDateTime("02/06/2018 23:20").buildPersonalTask();
+    public static final Task EXAMPLE4 = new TaskBuilder().withTuteeName(null).withDescription("exampleTask4")
+            .withDuration("3h20m").withDateTime("02/07/2018 23:20").buildPersonalTask();
 
     private TypicalTasks() {} // prevents instantiation
     /**

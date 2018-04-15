@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Task with an invalid duration field -->
+<!-- Task with an invalid dateandtime field -->
 <tasks>
     <description>exampleTask1</description>
-    <duration>3h2m</duration>
-    <dateandtime>05/02/2018 3:20</dateandtime>
+    <duration>3h20m</duration>
+    <dateAndTime>2018-00-00T03:20</dateAndTime>
 </tasks>
