@@ -44,8 +44,8 @@ public class ParserUtil {
 
     private static final String EMPTY_STRING = "";
     private static final String TUTEE_TAG_NAME = "Tutee";
-    public static final String ZERO_DURATION_FIRST_FORMAT = "0h0m";
-    public static final String ZERO_DURATION_SECOND_FORMAT = "0h00m";
+    private static final String ZERO_DURATION_FIRST_FORMAT = "0h0m";
+    private static final String ZERO_DURATION_SECOND_FORMAT = "0h00m";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
