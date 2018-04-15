@@ -181,7 +181,7 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
             accessor = FORMATTER_MONTH_MM.parse("0" + monthString);
             month = accessor.get(ChronoField.MONTH_OF_YEAR);
         } else if (monthString.length() == MONTH_WITH_MM_FORMAT_CHARACTER_LENGTH) {
-            checkMonthWithMMFormatValidity(monthString);
+            checkMonthWithMmFormat(monthString);
             accessor = FORMATTER_MONTH_MM.parse(monthString);
             month = accessor.get(ChronoField.MONTH_OF_YEAR);
         } else if (monthString.length() == MONTH_WITH_MMM_FORMAT_CHARACTER_LENGTH) {
@@ -198,8 +198,8 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
      * Checks whether a given month is a valid month with mm format
      * @param monthString the month provided by user input
      */
-    private void checkMonthWithMMFormatValidity(String monthString) {
-        try{
+    private void checkMonthWithMmFormat(String monthString) {
+        try {
             int tempMonth = Integer.parseInt(monthString);
             if (tempMonth > AMOUNT_OF_MONTHS) {
                 throw new DateTimeParseException(MESSAGE_INVALID_DATE_TIME, monthString, 0);
