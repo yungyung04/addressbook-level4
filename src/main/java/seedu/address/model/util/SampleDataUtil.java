@@ -18,7 +18,12 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.personal.PersonalTask;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.exceptions.TimingClashException;
+import seedu.address.model.tutee.EducationLevel;
+import seedu.address.model.tutee.Grade;
+import seedu.address.model.tutee.School;
+import seedu.address.model.tutee.Subject;
 import seedu.address.model.tutee.TuitionTask;
+import seedu.address.model.tutee.Tutee;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -49,15 +54,18 @@ public class SampleDataUtil {
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+            new Tutee(new Name("Anas Shakra"), new Phone("514552256"), new Email("shakra.a@hotmail.com"),
+                new Address("590 Souart"), new Subject("Chemistry"), new Grade("A"),
+                new EducationLevel("college"), new School("NUS"), getTagSet("family")),
+            new Tutee(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.co"),
+                        new Address("Blk 47 Tampines Street 20"), new Subject("Chemistry"), new Grade("C"),
+                        new EducationLevel("college"), new School("NUS"), getTagSet("family")),
+            new Tutee(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+                        new Address("Blk 45 Aljunied Street"), new Subject("Physics"), new Grade("A"),
+                        new EducationLevel("college"), new School("NUS"), getTagSet("family")),
+            new Tutee(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+                        new Address("Blk 436 Serangoon Gardens Street"), new Subject("Math"), new Grade("C"),
+                        new EducationLevel("primary"), new School("NUS"), getTagSet("friend")),
         };
     }
     public static Task[] getSampleTasks() {
