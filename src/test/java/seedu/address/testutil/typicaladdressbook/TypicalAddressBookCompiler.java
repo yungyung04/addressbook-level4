@@ -8,7 +8,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Task;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.DuplicateTaskException;
 import seedu.address.model.person.exceptions.TimingClashException;
 
 /**
@@ -33,8 +32,6 @@ public class TypicalAddressBookCompiler {
                 ab.addTask(task);
             } catch (TimingClashException tce) {
                 throw new AssertionError("time clash is not possible");
-            } catch (DuplicateTaskException dte) {
-                throw new AssertionError("duplicate task detected");
             }
         }
         return ab;
@@ -57,8 +54,6 @@ public class TypicalAddressBookCompiler {
                 ab.addTask(task);
             } catch (TimingClashException tce) {
                 throw new AssertionError("time clash is not possible");
-            } catch (DuplicateTaskException dte) {
-                throw new AssertionError("duplicate task detected");
             }
         }
         return ab;

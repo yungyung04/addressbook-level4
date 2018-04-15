@@ -436,11 +436,11 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // tag::sortpersoncommand[]
 === Sort Person Command
 
-===== Reason for Implementation
+==== Reason for Implementation
 As the amount of contacts stored grows, it would be harder to browse the address book. Hence, Sort Person Command is created
 to ease users's experience in organizing their address book.
 
-===== How it is implemented
+==== How it is implemented
 The following sequence diagram shows the general idea of how sort person command works:
 
 image::SortPersonSequenceDiagram.png[width="800"]
@@ -455,16 +455,16 @@ calls the sortFilteredPersonList() method which utilises a SortedList object to 
 // tag::natural[]
 === Natural Language Identifier
 
-===== Reason for Implementation
+==== Reason for Implementation
 Figuring out the exact date for a tuition appointment can be tedious in some extent. Tutors would need to flip over a calendar, or to perform some
 operations in the context of this app. Based on this concern, as our goal is to simplify the life of tutor,
 we feel the importance of introducing a feature where tutors are able to set a tuition appointment not only by date,
 but also by using common terms such as: `today`, `next month`, etc.
 
-===== Current Implementation Limitation
+==== Current Implementation Limitation
 In the current implementation, common terms (or Natural Languages) are only identifiable by the `Find Task` command parser.
 
-===== How it is implemented
+==== How it is implemented
 A class named NaturalLanguageIdentifier applys the singleton design pattern as the class stores a private attribute that records the current time of the system clock.
 As this reference time must be the same throughout the entire execution of a command, this class should only be instantiated once.
 

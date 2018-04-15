@@ -6,7 +6,6 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Task;
-import seedu.address.model.person.exceptions.DuplicateTaskException;
 import seedu.address.model.person.exceptions.TimingClashException;
 
 /**
@@ -33,8 +32,6 @@ public class TypicalTasks {
         for (Task task : getTypicalTasks()) {
             try {
                 ab.addTask(task);
-            } catch (DuplicateTaskException e) {
-                throw new AssertionError("not possible");
             } catch (TimingClashException e) {
                 throw new AssertionError("Timing Clash");
             }
