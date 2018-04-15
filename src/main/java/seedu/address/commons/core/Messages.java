@@ -14,7 +14,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_FILTER_CATEGORY = "The filter category specified is invalid \n%1$s";
     public static final String MESSAGE_INVALID_SORTER_CATEGORY = "The sort category specified is invalid \n%1$s";
     public static final String MESSAGE_INVALID_DATE_TIME = "The input date and time is invalid. "
-            + "It should be in the form of dd/mm/yyyy";
+            + "It should be in the form of dd/mm/yyyy hh:mm";
     public static final String MESSAGE_INVALID_KEYWORD_GIVEN = "The given keywords are invalid";
     public static final String MESSAGE_INVALID_DURATION = "The duration format is invalid. "
             + "It should be in the form of XXh:XXm and it cannot be zero";
