@@ -25,4 +25,6 @@ public interface Task {
     String getDuration();
 
     Entry getEntry();
+
+    boolean equals(Object two);
 }

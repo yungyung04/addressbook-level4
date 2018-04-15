@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
-//@@author yungyung04
-
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
@@ -12,6 +11,7 @@ import seedu.address.model.Task;
 /**
  * A utility class for Task.
  */
+//@@author a-shakra
 public class TaskUtil {
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm")
             .withResolverStyle(ResolverStyle.STRICT);
@@ -32,5 +32,14 @@ public class TaskUtil {
         sb.append(task.getDuration() + " ");
         sb.append(task.getDescription() + " ");
         return sb.toString();
+    }
+
+    /**
+     * Converts a date and time string to a local date time object
+     */
+    public static LocalDateTime toLocalDateAndTime(String sDateAndTime) {
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
+        LocalDateTime lDateAndTime = LocalDateTime.parse(sDateAndTime, FORMATTER);
+        return lDateAndTime;
     }
 }
