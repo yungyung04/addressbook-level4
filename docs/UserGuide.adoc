@@ -63,6 +63,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 // tag::conceptintro[]
 == Concepts Introduction
+* Contact : This refers to both the tutee and person.
 * Tutee  : This refers to the students you are teaching. Adding a student as tutee requires specific *tutee details* to be provided.
          By doing so, it will be easier to organize your contacts using our special features. +
 * Person : Other contacts which are not tutee. +
@@ -151,7 +152,7 @@ Format: `listtutee` +
 // end::listtutee[]
 
 // tag::edit[]
-=== Editing a person : `edit`
+=== Editing a contact : `edit`
 
 Edits existing contact's details in the address book. +
 Using Command Word: +
