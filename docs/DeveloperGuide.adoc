@@ -431,6 +431,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 // tag::sortpersoncommand[]
 === Sort Person Command
+
 ===== Reason for Implementation
 As the amount of contacts stored grows, it would be harder to browse the address book. Hence, Sort Person Command is created
 to ease users's experience in organizing their address book.
@@ -446,8 +447,10 @@ A comparator object is required since the sorting implementation utilizes JavaFX
 Here, PersonSortUtil class is responsible in providing a suitable comparator that matches the sorting behaviour requested by the user. Upon receiving the comparator, SortPersonCommand
 calls the sortFilteredPersonList() method which utilises a SortedList object to perform the sorting.
 // end::sortpersoncommand[]
+
 // tag::natural[]
 === Natural Language Identifier
+
 ===== Reason for Implementation
 Figuring out the exact date for a tuition appointment can be tedious in some extent. Tutors would need to flip over a calendar, or to perform some
 operations in the context of this app. Based on this concern, as our goal is to simplify the life of tutor,
@@ -472,6 +475,7 @@ Valid or recognized natural languages are determined by a static list inside the
 This list of Strings stores common terms used by tutors. If a given user input matches one of the terms in the list, that input
 is treated as a valid natural language.
 // end::natural[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
