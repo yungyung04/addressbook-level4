@@ -20,7 +20,7 @@ public class TaskSortUtil {
     private static final Logger logger = LogsCenter.getLogger(TaskSortUtil.class);
 
     /**
-     * Returns the apppropriate Task comparator given the sorting category
+     * Returns the appropriate Task comparator given the sorting category
      */
     public static Comparator<Task> getComparator(String sortCategory) {
         Comparator<Task> comparator = null;

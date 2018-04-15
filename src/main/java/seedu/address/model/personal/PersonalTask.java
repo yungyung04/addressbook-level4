@@ -18,9 +18,9 @@ public class PersonalTask implements Task {
     private static final String HOUR_DELIMITER = "h";
     private static final String MINUTE_DELIMITER = "m";
     private static final String NULL_STRING = "";
+
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm")
             .withResolverStyle(ResolverStyle.STRICT);
-
     private String description;
     private String duration;
     private LocalDateTime taskDateTime;
@@ -152,18 +152,5 @@ public class PersonalTask implements Task {
                 && otherTask.getDuration().equals(this.getDuration())
                 && otherTask.getTaskDateTime().toString().equals(this.getTaskDateTime().toString());
     }
-
-    /**
-     * this fixes the valid args test, but has conflict with Task card
-     * This is the old equals. TO be determined which to keep
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof PersonalTask // instanceof handles nulls
-                && taskDateTime.equals(((PersonalTask) other).taskDateTime)
-                && duration.equals(((PersonalTask) other).duration)
-                && description.equals(((PersonalTask) other).description));
-    }
-    */
 
 }
