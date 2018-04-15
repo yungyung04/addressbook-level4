@@ -105,11 +105,9 @@ public class AddressBookParser {
             return new RedoCommand();
 
         case AddTuitionTaskCommand.COMMAND_WORD:
-            // TO DO IN FUTURE : case AddTuitionTaskCommand.COMMAND_ALIAS;
             return new AddTuitionTaskCommandParser().parse(arguments);
 
         case AddPersonalTaskCommand.COMMAND_WORD:
-            // TO DO IN FUTURE : case AddTuitionTaskCommand.COMMAND_ALIAS;
             return new AddPersonalTaskCommandParser().parse(arguments);
 
         case DeleteTaskCommand.COMMAND_WORD:
