@@ -546,11 +546,6 @@ Examples:
 `list` +
 `undo` (reverses the `delete 1` command) +
 
-* `select 1` +
-`list` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
-
 * `delete 1` +
 `clear` +
 `u` (reverses the `clear` command) +
@@ -602,7 +597,7 @@ TuitionConnect data are saved in the hard disk automatically after any command t
 There is no need to save manually.
 // tag::proposedfeatures[]
 === View tutee fees `[coming in v2.0]`
-View the amount that has to be paid by a tutee.
+Views the amount that has to be paid by a tutee.
 
 === View tuition progress `[coming in v2.0]`
 Shows the details of tuition provided within several months in the form of a graph.
@@ -619,7 +614,10 @@ Marks a task as completed. If the task is tuition, fees will automatically be ad
 Edits date, time, duration or description of an existing task and reflects the changes on the calendar.
 
 === View contact address on Google map `[coming in v2.0]`
-View the location of a specific contact's address on google map and the shortest route from the current location will be displayed.
+Views the location of a specific contact's address on google map and the shortest route from the current location will be displayed.
+
+=== Select a contact or a task `[coming in v2.0]`
+Selects either a contact or a task and a pop up page containing all the relevant information will appear.
 // end::ChoChihTunV2.0[]
 
 == FAQ
@@ -680,8 +678,6 @@ e.g. `spb grade` +
 * *Sort Task By* : `stb CATEGORY` +
 e.g. `stb datetime` +
 * *Help* : `help` +
-* *Select* : `s INDEX` +
-e.g.`s 2` +
 * *History* : `h` +
 * *Undo* : `u` +
 * *Redo* : `r`
